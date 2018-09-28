@@ -1,0 +1,32 @@
+angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$route', '$rootScope', '$scope', '$routeParams', '$log', function($route, $rootScope, $scope, $routeParams, $log) {
+	    $rootScope.rootFields.showContent = false;
+            $scope.disableShow=true;
+            $scope.name = '';
+            $scope.id = $routeParams.organizationId;
+
+            // organizations                                                                                     
+            $scope.quotaDefID = 0;
+            $scope.organizationTotalQuota = 0;
+            $scope.usedQuotaPercent = 0.0;
+
+            // space info                                                                                        
+            $scope.spaces = [];
+            $scope.nrOfSpaces = 0;
+            $scope.spacesTotalQuota = 0;
+
+            // domain info                                                                                       
+            $scope.sharedDomains = [];
+            $scope.privateDomains = [];
+            $scope.nrOfDomains = 0;
+
+            // users                                                                                             
+            $scope.users = [];
+            $scope.nrOfOrganizationUsers = 0;
+            //$scope.allUsersForOrganization = [];                                                               
+
+            $scope.currentUser = {
+                name: localStorage.getItem('userName'),
+                currentManager: false
+            };
+
+	}]);

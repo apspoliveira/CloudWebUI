@@ -1,0 +1,16 @@
+angular.module('app.login')
+    .controller('LoginCtrl', ['$scope', '$location', '$route', '$log',
+			      function($scope, $location, $route, $log) { 
+			$scope.loginData = {
+			    username: '',
+			    password: ''
+			};
+
+			$scope.login = function() {
+			}
+
+			$scope.logout = function() {
+			    $location.path('/login');
+			    $route.reload();
+			}
+		    }]);

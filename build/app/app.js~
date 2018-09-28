@@ -1,0 +1,16 @@
+angular.module('app', [
+		       'ngRoute',
+		       'ngTouch',
+		       'ngAnimate',
+		       
+		       'ui.bootstrap',
+		       'ui.bootstrap.demo',
+
+		       //		       'app.message',
+		       
+		       'app.application',
+		       'app.login',
+		       'app.organization',
+		       'app.space',
+		       'app.marketplace'
+		       ]);

@@ -1,0 +1,48 @@
+angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scope', '$routeParams', '$log', function($rootScope, $scope, $routeParams, $log) {
+	    $rootScope.rootFields.showContent = false;
+
+            $scope.name = '';
+            $scope.organizationId = $routeParams.organizationId;
+            $scope.id = $routeParams.spaceId;
+            $scope.spaceId = $routeParams.spaceId;
+
+            $scope.applications = [];
+            $scope.nrOfApplications = 0;
+            $scope.services = [];
+            $scope.nrOfServices = 0;
+
+            $scope.routes = [];
+            $scope.nrOfRoutes = 0;
+
+            $scope.users = [];
+            $scope.usersOrganization = [];
+            $scope.nrOfSpaceUsers = 0;
+
+            $scope.userName = localStorage.getItem('userName');
+
+            $scope.showOrphanRoute = false;
+
+            $scope.currentUser = {
+                name: localStorage.getItem('userName'),
+                spaceId: $routeParams.spaceId,
+                currentManager: false
+            };
+
+	    // service summary from api                                                                          
+            $scope.getRoutesForTheSpace = function(){
+                if ($scope.routes.length > 0) {
+                    $scope.routes.length = 0;
+                }
+
+                $scope.showOrphanRoute = false;
+
+                var applications = $scope.applications;
+	    };
+
+	    $scope.getApplicationsForTheSpace = function() {                                                   
+                if ($scope.applications.length > 0) {                                                                               $scope.applications.length = 0;                                                              
+                }                                           
+
+		var promises = [];     
+
+		
