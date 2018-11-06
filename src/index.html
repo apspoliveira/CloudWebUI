@@ -1,9 +1,13 @@
 <html lang="en" ng-app='app'>
 <head>
   <title>CF Web UI</title>
-
+  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">   
+  
+  <link rel="stylesheet" href="style.css">
+  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.1/angular.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.1/angular-route.js"></script>
@@ -11,10 +15,14 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.1/angular-animate.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.11.2/ui-bootstrap-tpls.js"></script>
   
+  <script src="../node_modules/bcryptjs/dist/bcrypt.js"></script>
+  <script src="../node_modules/bcryptjs/src/base64/native.js"></script>
+  <script src="../node_modules/base64url/dist/base64url.js"></script>
+
   <script src="app/app.js"></script>
   <script src="app/app.config.js"></script>
   <script src="app/app.run.js"></script>
-
+  
   <script src="app/login/login.js"></script>
   <script src="app/application/application.js"></script>
   <script src="app/organization/organization.js"></script>
@@ -22,8 +30,17 @@
   <script src="app/marketplace/marketplace.js"></script>
   <script src="app/authentication/auth.js"></script>
   <script src="app/message/message.js"></script>
+  <script src="app/route/route.js"></script>
+  <script src="app/domain/domain.js"></script>
+  <script src="app/featureFlag/featureFlag.js"></script>
+  <script src="app/info/info.js"></script>
+  <script src="app/service/service.js"></script>
+  <script src="app/serviceBinding/serviceBinding.js"></script>
+  <script src="app/serviceInstance/serviceInstance.js"></script>
+  <script src="app/user/user.js"></script>
   
   <script src="app/message/messageService.js"></script>
+  <!--<script src="app/message/messageDirective.js"></script>-->
   <script src="app/authentication/authService.js"></script>
   <script src="app/authentication/authInterceptorService.js"></script>
   <script src="app/login/loginCtrl.js"></script>
@@ -31,18 +48,29 @@
   <script src="app/organization/organizationAddCtrl.js"></script>
   <script src="app/organization/organizationService.js"></script>
   <script src="app/organization/organizationDetailsCtrl.js"></script>
+  <script src="app/space/spaceService.js"></script>
   <script src="app/space/spaceDetailsCtrl.js"></script>
   <script src="app/marketplace/marketplaceAddServiceCtrl.js"></script>
   <script src="app/marketplace/marketplaceSelectServicePlanCtrl.js"></script>
   <script src="app/marketplace/marketplaceAddServiceInstanceCtrl.js"></script>
+  <script src="app/application/applicationService.js"></script>
   <script src="app/application/applicationDetailsCtrl.js"></script>
   <script src="app/marketplace/marketplaceAddServiceCtrl.js"></script>
+  <script src="app/route/route.js"></script>
+  <script src="app/route/routeService.js"></script>
+  <script src="app/domain/domainService.js"></script>
+  <script src="app/featureFlag/featureFlagService.js"></script>
+  <script src="app/info/infoService.js"></script>
+  <script src="app/service/serviceService.js"></script>
+  <script src="app/serviceBinding/serviceBindingService.js"></script>
+  <script src="app/serviceInstance/serviceInstanceService.js"></script>
+  <script src="app/serviceInstance/serviceInstanceDetailsCtrl.js"></script>
+  <script src="app/user/userService.js"></script>
 
-  <!--<script src="script.js"></script>-->
 </head>
 <body>
-
-   <ng-view></ng-view>
-
+  
+  <ng-view></ng-view>
+  
 </body>
 </html>

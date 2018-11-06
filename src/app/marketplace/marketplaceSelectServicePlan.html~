@@ -1,13 +1,13 @@
 <sidebar></sidebar>
 
-<div id="page-content" ng-style="{'marginLeft': rootFields.marginSidebar}">
+<div id="page-content">
     <topbar></topbar>
 
     <breadcrumb></breadcrumb>
 
     <messages></messages>
 
-    <div class="fadein" ng-show="rootFields.showContent">
+    <div class="fadein">
         <div id="page-title">
             <h1>Services Marketplace</h1>
         </div><!-- /#page-title -->
@@ -22,8 +22,7 @@
                         <div class="panel-body">
                             <div class="selected-service row">
                                 <div class="col-md-4">
-                                    <img src="{{selectedService.imageUrl}}" alt="{{selectedService.name}}" width\
-="60">
+                                    <img src="{{selectedService.imageUrl}}" alt="{{selectedService.name}}" width="60">
                                     <h4>{{selectedService.name}}</h4>
                                     <p>{{selectedService.description}}</p>
                                 </div>
@@ -31,8 +30,7 @@
                                 <div class="col-md-4">
                                     <h4>About this service</h4>
                                     <p>{{selectedService.longDescription}}</p>
-                                    <p><a href="{{selectedService.documentationUrl}}" target="_blank">Documentat\
-ion</a> | <a href="{{selectedService.supportUrl}}" target="_blank">Support</a></p>
+                                    <p><a href="{{selectedService.documentationUrl}}" target="_blank">Documentation</a> | <a href="{{selectedService.supportUrl}}" target="_blank">Support</a></p>
                                 </div>
 
                                 <div class="col-md-4">
@@ -51,8 +49,7 @@ ion</a> | <a href="{{selectedService.supportUrl}}" target="_blank">Support</a></
                                             <ul>
                                                 <li ng-repeat="bullet in servicePlan.bullets">{{bullet}}</li>
                                             </ul>
-                                            <button class="btn btn-primary" ng-click="selectServicePlan(serviceP\
-lan.id)">Select {{servicePlan.name}}</button>
+                                            <button class="btn btn-primary" ng-click="selectServicePlan(servicePlan.id)">Select {{servicePlan.name}}</button>
                                         </tab>
                                     </tabset>
                                 </div>

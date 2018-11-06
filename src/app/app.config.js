@@ -14,12 +14,12 @@ angular.module('app').config(['$routeProvider', function($routeProvider) {
 	      templateUrl: 'app/organization/organizationDetails.html',
 		  controller: 'OrganizationDetailsCtrl'
 		  })
-
+      
       .when('/organizations/:organizationId/spaces/:spaceId', {
 	      templateUrl: 'app/space/spaceDetails.html',
 		  controller: 'SpaceDetailsCtrl'
 		  })
-
+      
       .when('/organizations/:organizationId/spaces/:spaceId/marketplace', {
 	      templateUrl: 'app/marketplace/marketplaceAddService.html',
 		  controller: 'MarketplaceAddServiceCtrl'
@@ -34,6 +34,11 @@ angular.module('app').config(['$routeProvider', function($routeProvider) {
 	      templateUrl: 'app/marketplace/marketplaceAddServiceInstance.html',
 		  controller: 'MarketplaceAddServiceInstanceCtrl'
 		  })
+
+      .when('/organizations/:organizationId/spaces/:spaceId/serviceInstances/:serviceInstanceId', {
+              templateUrl: 'app/serviceInstance/serviceInstanceDetails.html',
+                  controller: 'ServiceInstanceDetailsCtrl'
+                  })
 
       .when('/organizations/:organizationId/spaces/:spaceId/applications/:applicationId', {
 	      templateUrl: 'app/application/applicationDetails.html',
@@ -59,3 +64,8 @@ angular.module('app').config(['$routeProvider', function($routeProvider) {
 	      redirectTo: '/organizations'
 		  });
 	}]);
+
+/*angular.module('app').config(['$httpProvider', function($httpProvider) {
+	    $httpProvider.interceptors.push('authInterceptorService');
+	    $httpProvider.withCredentials = true;
+	    }]);*/

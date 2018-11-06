@@ -4,10 +4,10 @@ angular.module('app.organization').controller('OrganizationAddCtrl', ['$route', 
 		organizationService.addOrganization($scope.organization).then(function(response) {
 			
 			$route.reload();
-
+			
 			// set message                                                          
 			messageService.addMessage('success', 'The organization has been successfully added.', 'true');
-
+			
 			// close the modal                                                   
 			$modalInstance.close();
 			
@@ -15,12 +15,12 @@ angular.module('app.organization').controller('OrganizationAddCtrl', ['$route', 
 			// set message                                                         
 			messageService.addMessage('danger', 'The organization has not been added.');
 			$log.error(err);
-
+			
 			// close the modal                                
 			$modalInstance.close();
 		    });
 	    };
-
+	    
 	    $scope.cancel = function () {
 		$modalInstance.dismiss('cancel');
 	    };

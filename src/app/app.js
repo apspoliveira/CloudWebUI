@@ -13,5 +13,13 @@ angular.module('app', [
 		       'app.login',
 		       'app.organization',
 		       'app.space',
-		       'app.marketplace'
+		       'app.marketplace',
+                       'app.routes',
+                       'app.domain',
+                       'app.featureFlag',
+                       'app.info',
+                       'app.service',
+                       'app.serviceBinding',
+                       'app.serviceInstance',
+                       'app.user'
 		       ]);

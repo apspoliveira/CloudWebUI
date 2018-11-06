@@ -2,11 +2,10 @@
 
 <div id="page-content">
   <topbar></topbar>
-
-  <breadcrumb></breadcrumb>
-
-  <messages></messages>
   
+  <breadcrumb></breadcrumb>
+  
+  <messages></messages>
   <div class="fadein">
     <div id="page-title" class="clearfix">
       <h1 class="pull-left">Organization</h1>
@@ -20,7 +19,7 @@
               <h3 class="panel-title pull-right">Organizations <span class="label label-default">{{nrOfOrganizations}}</span></h3>
               <a ng-click="addOrganization()" class="btn btn-success pull-left"><i class="fa fa-plus"></i>&nbsp; Add a organization</a>
             </div>
-            <div  class="table-responsive"><table class="table table-striped table-hover has-actions">
+            <div class="table-responsive"><table class="table table-striped table-hover has-actions">
                 <thead>
                   <tr>
                     <th>Name</th>
@@ -29,8 +28,11 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="organization in organizations" ng-click="showOrg(organization.id, $event)">                        <td><a href="#/organizations/{{organization.id}}">{{organization.name}}</a></td>                                <td>                                                                                                               <span class="label" ng-class="organization.status == 'active' ? 'label-success' : 'label-danger'">{{organization.status}}</span>                                                                                             </td>                                                                                                           <td>                                                                                                               <a class="action action-edit" ng-click="editOrganization(organization);" title="Edit"><i class="fa fa-lg fa-pencil"></i></a>                                                                          <a class="action action-delete" ng-click="deleteOrganization(organization);" title="Delete"><i class="fa fa-lg fa-trash"></i></a>           
-                    </td>                                                                                       
+                  <tr ng-repeat="organization in organizations" ng-click="showOrg(organization.id, $event)">                        
+		    <td><a href="#/organizations/{{organization.id}}">{{organization.name}}</a></td>                                
+		    <td><span class="label" ng-class="organization.status == 'active' ? 'label-success' : 'label-danger'">{{organization.status}}</span></td>                              
+		    <td><a class="action action-edit" ng-click="editOrganization(organization);" title="Edit"><i class="fa fa-lg fa-pencil"></i></a><a class="action action-delete" ng-click="deleteOrganization(organization);" title="Delete"><i class="fa fa-lg fa-trash"></i></a>           
+                    </td>                                                                        
                   </tr>
                 </tbody>
             </table></div>

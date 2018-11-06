@@ -1,5 +1,6 @@
 ---
 applications:
 - name: cf
-  host: console-cf
-  path: ./build
+  memory: 128M
+  host: cloudwebui
+  path: ./src

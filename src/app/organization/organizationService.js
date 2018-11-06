@@ -1,77 +1,75 @@
 angular.module('app.organization').factory('organizationService', ['$http', function($http) {
-	    var organizationServiceFactory = {};
 
+	    var organizationServiceFactory = {};
+	    
 	    var API_Endpoint = 'https://api.eu-gb.bluemix.net';
+	    //var API_Endpoint = 'https://api.run.pivotal.io'; 
 
 	    var accessToken = localStorage.getItem('accessToken');
 
+	    var _getOrganizationSummary = function(id) {
+		
+		var url = API_Endpoint+'/v2/organizations/' + id + '/summary';
+
+		// http headers                                                                   
+                var headers = {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'bearer ' + accessToken
+                };
+
+		var config = {
+                    headers: headers
+                };
+
+                return $http.get(url, config);
+	    }
+	    
 	    var _getOrganizations = function() {
-
+		
                 var url = API_Endpoint+'/v2/organizations';
-
+		
                 // http headers                                                            
 		var headers = {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
 		    'Authorization': 'bearer ' + accessToken
                 };
-
+		
                 var config = {
                     headers: headers
                 };
-
+		
                 return $http.get(url, config);
             };
-
+	    
 	    var _getOrganization = function(id) {
 		
-		//window.alert('organization: ' + id);
-		
                 var url = API_Endpoint+'/v2/organizations/' + id;
-
+		
                 // http headers                                                             
 		headers = {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     'Authorization': 'bearer ' + accessToken
                 };
-
+		
                 var config = {
                     headers: headers
                 };
-
+		
                 return $http.get(url, config);
             };
 
-	    var _getSpacesForTheOrganization = function(id, ignoreLoadingBar) {
-                if (typeof(ignoreLoadingBar) === 'undefined') ignoredLoadingBar = false;
-                // params                                                                                            
-                var url = API_Endpoint+'/v2/organizations/' + id + '/spaces';
+	    var _getOrganizationInstanceUsage = function(id) {
 
-                // http headers                                                              
+		var url = API_Endpoint+'/v2/organizations/' + id + '/instance_usage';
+
+                // http headers                                                            
 		headers = {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     'Authorization': 'bearer ' + accessToken
-		};
-
-                var config = {
-                    headers: headers,
-                    ignoreLoadingBar: ignoredLoadingBar
-                };
-
-                return $http.get(url, config);
-            };
-
-	    var _getQuotaForTheOrganization = function(id) {
-                // params                                                                                            
-                var url = API_Endpoint+'/v2/quota_definitions';
-
-                // http headers                                                              
-		headers = {
-		    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': 'bearer ' + accessToken
                 };
 
                 var config = {
@@ -79,13 +77,13 @@ angular.module('app.organization').factory('organizationService', ['$http', func
                 };
 
                 return $http.get(url, config);
-            };
+	    }
 
-	    var _getSharedDomainsForTheOrganization = function() {
+	    var _getOrganizationMemoryUsage = function(id) {
 
-                var url = API_Endpoint+'/v2/shared_domains';
+		var url = API_Endpoint+'/v2/organizations/' + id + '/memory_usage';
 
-                // http headers                                                                                      
+                // http headers                                                                   
                 headers = {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
@@ -97,10 +95,155 @@ angular.module('app.organization').factory('organizationService', ['$http', func
                 };
 
                 return $http.get(url, config);
+	    }
+	    
+	    var _getAuditorsForTheOrganization = function(id) {
+
+		var url = API_Endpoint+'/v2/organizations/' + id + '/auditors';
+
+                // http headers                                                           
+		headers = {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'bearer ' + accessToken
+                };
+
+                var config = {
+                    headers: headers
+                };
+
+                return $http.get(url, config);
+	    }
+
+	    var _getBillingManagersForTheOrganization = function(id) {
+
+		var url = API_Endpoint+'/v2/organizations/' + id + '/billing_managers';
+
+                // http headers                                                                   
+                headers = {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'bearer ' + accessToken
+                };
+
+                var config = {
+                    headers: headers
+                };
+
+                return $http.get(url, config);
+	    }
+
+	    var _getDomainsForTheOrganization = function(id) {
+		
+		var url = API_Endpoint+'/v2/organizations/' + id + '/domains';
+
+                // http headers                                                               
+		headers = {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'bearer ' + accessToken
+                };
+
+                var config = {
+                    headers: headers
+                };
+
+                return $http.get(url, config);
+	    }
+
+	    var _getManagersForTheOrganization = function(id) {
+
+		var url = API_Endpoint+'/v2/organizations/' + id + '/managers';
+
+                // http headers                                                            
+		headers = {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'bearer ' + accessToken
+                };
+
+                var config = {
+                    headers: headers
+                };
+
+                return $http.get(url, config);
+	    }
+
+	    var _getServicesForTheOrganization = function(id) {
+		
+		var url = API_Endpoint+'/v2/organizations/' + id + '/services';
+
+		// http headers                                                            
+		headers = {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'bearer ' + accessToken
+                };
+
+                var config = {
+                    headers: headers
+                };
+
+                return $http.get(url, config);
+	    }
+	    
+	    var _getSpacesForTheOrganization = function(id) {
+
+                // params                                                  
+                var url = API_Endpoint+'/v2/organizations/' + id + '/spaces';
+		
+                // http headers                                                              
+		headers = {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'bearer ' + accessToken
+		};
+
+                var config = {
+                    headers: headers
+                };
+		
+                return $http.get(url, config);
+            };
+	    
+	    var _getSpaceQuotaDefinitionsForTheOrganization = function(id) {
+                // params                                                  
+                var url = API_Endpoint+'/v2/organizations/' + id + '/space_quota_definitions';
+		
+                // http headers                                                              
+		headers = {
+		    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'bearer ' + accessToken
+                };
+		
+                var config = {
+                    headers: headers
+                };
+		
+                return $http.get(url, config);
             };
 
-	    var _getPrivateDomainsForTheOrganization = function(id) {
+	    var _getSharedDomainsForTheOrganization = function() {
+		
+                var url = API_Endpoint+'/v2/shared_domains';
 
+                // http headers                                                                                      
+                headers = {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'bearer ' + accessToken
+                };
+		
+                var config = {
+                    headers: headers
+                };
+		
+                return $http.get(url, config);
+            };
+	    
+	    var _getPrivateDomainsForTheOrganization = function(id) {
+		
                 var url = API_Endpoint+'/v2/organizations/' + id + '/private_domains';
 
                 // http headers                                                                                      
@@ -113,47 +256,47 @@ angular.module('app.organization').factory('organizationService', ['$http', func
                 var config = {
                     headers: headers
                 };
-
+		
                 return $http.get(url, config);
             };
 	    
 	    var _getAllUsersForTheOrganization = function(id) {
 
-                // params                                                                                            
+                // params                                                               
                 var url = API_Endpoint+'/v2/organizations/' + id + '/users';
-
+		
                 // http headers                                                                                      
                 headers= {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     'Authorization': 'bearer ' + accessToken
                 };
-
+		
                 var config = {
                     headers: headers
                 };
-
+		
                 return $http.get(url, config);
             };
 
 	    var _retrieveRolesOfAllUsersForTheOrganization = function(id) {
 
                 var url = API_Endpoint+'/v2/organizations/' + id + '/user_roles';
-
+		
                 // http headers                                                                                      
                 headers= {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     'Authorization': 'bearer ' + accessToken
                 };
-
+		
                 var config = {
                     headers: headers
                 };
-
+		
                 return $http.get(url, config);
             };
-
+	    
 	    var _addOrganization = function(organization) {
 		
                 var url = API_Endpoint+'/v2/organizations';
@@ -167,7 +310,7 @@ angular.module('app.organization').factory('organizationService', ['$http', func
 		headers= {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-		    'Authorization': 'bearer ' + accessToken
+		    'Authorization': 'bearer ' + accessToken 
                 };
 		
                 var config = {
@@ -181,60 +324,60 @@ angular.module('app.organization').factory('organizationService', ['$http', func
 			window.alert(err + ' ' + status);
 		    });
             };
-
+	    
 	    var _editOrganization = function(organization) {
-
+		
                 var url = API_Endpoint+'/v2/organizations/' + organization.id;
-
+		
                 // data                                                                                              
                 var data = {
                     'name': organization.name
                 };
-
+		
                 // http headers                                                                                      
                 headers= {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json; charset=utf-8',
                     'Authorization': 'bearer ' + accessToken
                 };
-
+		
                 var config = {
                     headers: headers
                 };
-
+		
                 return $http.put(url, data, config);
             };
-
+	    
 	    var _deleteOrganization = function(organization) {
-
+		
                 var url = API_Endpoint+'/v2/organizations/' + organization.id;
-
+		
                 // data                                                                                              
                 var data = {
                     'guid' : organization.id,
                     'async' : true,
                     'recursive' : true
                 };
-
+		
                 // http headers                                                                                      
                 headers= {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     'Authorization': 'bearer ' + accessToken
                 };
-
+		
 		var config = {
                     headers: headers,
                     data: data
                 };
-
+		
                 return $http.delete(url, config);
             };
-
+	    
 	    var _associateUserWithOrganization = function(user) {
-
+		
                 var url = API_Endpoint+'/v2/organizations/' + user.organizationId + '/users';
-
+		
 		// data                                                                                              
                 var data = {
                     'username': user.name                                                       
@@ -246,41 +389,41 @@ angular.module('app.organization').factory('organizationService', ['$http', func
                     'Content-Type': 'application/json',
                     'Authorization': 'bearer ' + accessToken
                 };
-
+		
                 var config = {
                     headers: headers
                 };
-
+		
                 return $http.put(url, data, config);
             };
-
+	    
 	    var _disassociateUserWithOrganization = function(user) {
-
+		
                 var url = API_Endpoint+'/v2/organizations/' + user.organizationId + '/users/' + user.id;
-
+		
 		// http headers                                                                                      
                 headers= {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     'Authorization': 'bearer ' + accessToken
                 };
-
+		
                 var config = {
                     headers: headers
                 };
-
+		
                 return $http.delete(url, config);
             };
-
+	    
 	    var _associateManagerWithOrganization = function(user) {
-
+		
                 var url = API_Endpoint+'/v2/organizations/' + user.organizationId + '/managers';
-
+		
 		// data                                                                                              
                 var data = {
                     'username': user.name                       
                 };
-
+		
                 // http headers                                                                                      
 		headers= {
                     'Accept': 'application/json',
@@ -291,113 +434,121 @@ angular.module('app.organization').factory('organizationService', ['$http', func
                 var config = {
                     headers: headers
                 };
-
+		
                 return $http.put(url, data, config);
             };
-
+	    
 	    var _disassociateManagerWithOrganization = function(user) {
-
+		
                 var url = API_Endpoint+'/v2/organizations/' + user.organizationId + '/managers/' + user.id;
-
+		
                 // http headers                                                                                      
                 headers= {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     'Authorization': 'bearer ' + accessToken
                 };
-
+		
                 var config = {
                     headers: headers
                 };
-
+		
                 return $http.delete(url, config);
             };
 	    
 	    var _associateBillingManagerWithOrganization = function(user) {
-
+		
                 var url = API_Endpoint+'/v2/organizations/' + user.organizationId + '/billing_managers';
-
+		
                 // data                                                                                              
                 var data = {
                     'username': user.name
 		};
-
+		
                 // http headers                                                                                      
                 headers= {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     'Authorization': 'bearer ' + accessToken
                 };
-
+		
                 var config = {
                     headers: headers
                 };
-
+		
                 return $http.put(url, data, config);
             };
-
+	    
 	    var _disassociateBillingManagerWithOrganization = function(user) {
-
+		
                 var url = API_Endpoint+'/v2/organizations/' + user.organizationId + '/billing_managers/' + user.id;                                                           
-
+		
                 // http headers                                              
                 headers= {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     'Authorization': 'bearer ' + accessToken
                 };
-
+		
                 var config = {
                     headers: headers
                 };
-
+		
                 return $http.delete(url, config);
             };
-
+	    
 	    var _associateAuditorWithOrganization = function(user) {
 
                 var url = API_Endpoint+'/v2/organizations/' + user.organizationId + '/auditors';
-
+		
                 // data                                                   
                 var data = {
                     'username': user.name                                                       
                 };
-
+		
                 // http headers                                                                                      
                 var headers= {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     'Authorization': 'bearer ' + accessToken
                 };
-
+		
                 var config = {
                     headers: headers
                 };
-
+		
                 return $http.put(url, data, config);
             };
-
+	    
 	    var _disassociateAuditorWithOrganization = function(user) {
-
+		
                 var url = API_Endpoint+'/v2/organizations/' + user.organizationId + '/auditors/' + user.id;
-                                                      
+                
                 // http headers                                                                  
                 var headers= {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     'Authorization': 'bearer ' + accessToken
                 };
-
+		
                 var config = {
                     headers: headers,
                 };
-
+		
                 return $http.delete(url, config);
             };
-
+	    
+	    organizationServiceFactory.getOrganizationSummary = _getOrganizationSummary;
 	    organizationServiceFactory.getOrganizations = _getOrganizations;
             organizationServiceFactory.getOrganization = _getOrganization;
-            organizationServiceFactory.getQuotaForTheOrganization = _getQuotaForTheOrganization;
+	    organizationServiceFactory.getOrganizationInstanceUsage = _getOrganizationInstanceUsage;
+	    organizationServiceFactory.getOrganizationMemoryUsage = _getOrganizationMemoryUsage;
+	    organizationServiceFactory.getAuditorsForTheOrganization = _getAuditorsForTheOrganization;
+	    organizationServiceFactory.getBillingManagersForTheOrganization = _getBillingManagersForTheOrganization;
+	    organizationServiceFactory.getDomainsForTheOrganization = _getDomainsForTheOrganization;
+	    organizationServiceFactory.getManagersForTheOrganization = _getManagersForTheOrganization;
+            organizationServiceFactory.getServicesForTheOrganization = _getServicesForTheOrganization;
+	    organizationServiceFactory.getSpaceQuotaDefinitionsForTheOrganization = _getSpaceQuotaDefinitionsForTheOrganization;
             organizationServiceFactory.getSpacesForTheOrganization = _getSpacesForTheOrganization;
             organizationServiceFactory.getSharedDomainsForTheOrganization = _getSharedDomainsForTheOrganization;
             organizationServiceFactory.getPrivateDomainsForTheOrganization = _getPrivateDomainsForTheOrganization;
