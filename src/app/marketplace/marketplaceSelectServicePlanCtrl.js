@@ -15,7 +15,7 @@ angular.module('app.marketplace').controller('MarketplaceSelectServicePlanCtrl',
 		    window.alert('get service');
 		    
 		    var service = response.data;
-		    //angular.forEach(response.data.resources, function(service, i) {                         
+		                          
 		    var extraData = JSON.parse(response.data.entity.extra);
 		    
 		    var objectService = {
@@ -31,10 +31,9 @@ angular.module('app.marketplace').controller('MarketplaceSelectServicePlanCtrl',
 		    };
 		    
 		    $scope.selectedService=objectService;
-		    //});                                                                        
+		                                                                          
 		}, function(err) {
-		    //messageService.addMessage('danger', 'The marketplace services have not been loaded.');
-		    window.alert(err.data.error_code + ' ' + err.data.description);//'The marketplace services have not been loaded.');
+		    window.alert(err.data.error_code + ' ' + err.data.description);
 		    $log.error(err);
 		});
 

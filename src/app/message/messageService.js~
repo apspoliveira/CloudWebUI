@@ -10,7 +10,7 @@ angular.module('app.message').factory('messageService', ['$rootScope', function(
                     type: type,
                     msg: msg
                 };
-                //window.alert(message.type + ' ' + message.msg);
+                window.alert(type + ' ' + msg);
                 _messages.push(message);
             };
 

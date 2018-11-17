@@ -202,7 +202,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
 			    deferred.reject(err);
 			});
 		
-		//return deferred.promise;
+		return deferred.promise;
 	    };
 
 	    var _client_credentials = function () {

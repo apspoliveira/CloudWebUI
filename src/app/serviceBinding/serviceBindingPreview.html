@@ -1,0 +1,43 @@
+<sidebar></sidebar>
+
+<div id="page-content">
+  <topbar></topbar>
+  
+  <breadcrumb></breadcrumb>
+  
+  <messages></messages>
+  <div class="fadein">
+    <div id="page-title" class="clearfix">
+      <h1 class="pull-left">Service Binding</h1>
+    </div><!-- /#page-title -->
+    
+    <div id="page-content-wrap" class="clearfix">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+              <h3 class="panel-title pull-right">Service Bindings <span class="label label-default">{{nrOfServiceBindings}}</span></h3>
+              <a ng-click="addOrganization()" class="btn btn-success pull-left"><i class="fa fa-plus"></i>&nbsp; Add a service binding</a>
+            </div>
+            <div class="table-responsive"><table class="table table-striped table-hover has-actions">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Application Id</th>
+                    <th>Service Instance Id</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="serviceBinding in serviceBindings" ng-click="showOrg(organization.id, $event)">
+                    <td><a href="#/organizations/{{organization.id}}">{{serviceBinding.name}}</a></td>
+                    <td><span class="label" ng-class="organization.status == 'active' ? 'label-success' : 'label-danger'">{{serviceBinding.application_id}}</span></td>
+		    <td><span class="label" ng-class="organization.status == 'active' ? 'label-success' : 'label-danger'">{{serviceBinding.service_instance_id}}</span></td>
+                  </tr>
+                </tbody>
+            </table></div>
+          </div><!-- /.panel -->
+        </div>
+      </div><!-- /.row -->
+    </div>
+  </div>
+</div>

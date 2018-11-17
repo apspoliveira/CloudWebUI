@@ -6,7 +6,6 @@ angular.module('app.serviceInstance').factory('serviceInstanceService', ['$http'
             var accessToken = localStorage.getItem('accessToken');
                                                     
 	    var _getServiceInstance = function(serviceInstanceId) {
-		window.alert('get service instance');
 
 		// params                                                                                                                                  
                 var url = API_Endpoint+'/v2/service_instances/'+serviceInstanceId;
@@ -26,7 +25,6 @@ angular.module('app.serviceInstance').factory('serviceInstanceService', ['$http'
             };
 
 	    var _getRoutesForServiceInstance = function(serviceInstanceId) {
-		window.alert('get routes');
 		// params                                                                                                                            
                 var url = API_Endpoint+'/v2/service_instances/' + serviceInstanceId + '/routes';
 
@@ -45,7 +43,6 @@ angular.module('app.serviceInstance').factory('serviceInstanceService', ['$http'
 	    }
 
 	    var _getServiceKeysForServiceInstance = function(serviceInstanceId) {
-		window.alert('get service keys');
 		
 		// params
 
@@ -66,7 +63,6 @@ angular.module('app.serviceInstance').factory('serviceInstanceService', ['$http'
 	    }
 	    
 	    var _getServiceBindingsForServiceInstance = function(serviceInstanceId) {
-		window.alert('get service bindings');
 
                 // params                                                                         
                 var url = API_Endpoint+'/v2/service_instances/' + serviceInstanceId + '/service_bindings';
@@ -86,7 +82,6 @@ angular.module('app.serviceInstance').factory('serviceInstanceService', ['$http'
             };
 
 	    var _getPermissionsForServiceInstance = function(serviceInstanceId) {
-		window.alert('get permissions');
 
                 // params                                                                   
 		var url = API_Endpoint+'/v2/service_instances/' + serviceInstanceId + '/permissions';
@@ -106,7 +101,6 @@ angular.module('app.serviceInstance').factory('serviceInstanceService', ['$http'
 	    }
 	    
 	    var _getSharedFromForServiceInstance = function(serviceInstanceId) {
-		window.alert('get shared from');
 		
                 // params                                                                   
 		var url = API_Endpoint+'/v2/service_instances/' + serviceInstanceId + '/shared_from';
@@ -126,7 +120,6 @@ angular.module('app.serviceInstance').factory('serviceInstanceService', ['$http'
 	    }
 
 	    var _getSharedToForServiceInstance = function(serviceInstanceId) {
-		window.alert('get shared to');
 
 		// params                                                                         
                 var url = API_Endpoint+'/v2/service_instances/' + serviceInstanceId + '/shared_to';

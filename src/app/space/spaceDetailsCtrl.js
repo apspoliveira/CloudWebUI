@@ -53,13 +53,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 
 	    // service summary from api                                                    
 	    $scope.getRoutesForTheSpace = function(){
-		
-		//window.alert('get routes for the space');
-		
-                /*if ($scope.routes.length > 0) {
-		  $scope.routes.length = 0;
-		  }*/
-		
+	       
                 $scope.showOrphanRoute = false;
 		
                 var applications = $scope.applications;
@@ -74,8 +68,6 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
                                     apps: []
                                 };
 				
-				//window.alert('objectroute ' + objectRoute);
-
                                 for (var j = 0; j < applications.length; j++) {
                                     for (var i = 0; i < applications[j].routes.length; i++) {
                                         if (applications[j].routes[i].guid === objectRoute.id) {
@@ -94,36 +86,21 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 		    messageService.addMessage('danger', 'The routes have not been loaded.');
 			});
 		    
-		//window.alert('q ' + q);
 		return q;
 	    };
 	    
 	    $scope.getApplicationsForTheSpace = function() {                                 
-		
-		//window.alert('get applications for the space');
-		
-		/*if ($scope.applications.length > 0) {                                 
-		  $scope.applications.length = 0;                                         
-		  } */                                          
-		
+		                                         
 		var getSpaceSummaryPromise = spaceService.getSpaceSummary($scope.spaceId);     
-		//window.alert(getSpaceSummaryPromise);
 		var promises = [];                                                            
-		q = getSpaceSummaryPromise.then(function(response) {              
-			//window.alert('Space promise ' + Object.keys(response.data));
-
-			//$scope.getRoutesForTheSpace();                                    
+		q = getSpaceSummaryPromise.then(function(response) {                        
 			$scope.name = response.data.name;                        
-			
-			//window.alert(response.data.apps.length);
-
+		       
 			// populate applications                                                 
                         if (response.data.apps && response.data.apps.length > 0) {            
 			    $scope.nrOfApplications = response.data.apps.length;             
 			    $scope.applications = response.data.apps;                          
-			    angular.forEach(response.data.apps, function(app, i) {                                                                                
-                                    //window.alert(app + ' ' + i);
-
+			    angular.forEach(response.data.apps, function(app, i) {                                                                               
 				    var objectApp = {                                            
                                         id: app.guid,                                          
 					status: app.state === 'running',                       
@@ -133,8 +110,6 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 					url: app.urls[0], // only the first url
 					routes: app.routes                                 
 				    };                          
-
-				    //window.alert('objectApp ' + objectApp);
 
                                     if (app.state === 'STARTED' && (app.instances !== app.running_instances)) objectApp.status = 'crashed';                                                   
 				    for (var j = 0; j < response.data.apps.length; j++) {   
@@ -146,14 +121,9 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 				});                                                               
                         }                                                                         
                         // populate services                                                     
-                        if (response.data.services && response.data.services.length > 0) {       
-                            /*if ($scope.services.length > 0) {                                   
-				$scope.services.length = 0;                                 
-				} */                                                                    
+                        if (response.data.services && response.data.services.length > 0) {          
                             $scope.nrOfServices = response.data.services.length;                                                                                       
-                            angular.forEach(response.data.services, function(service, i) {        
-				    //          window.alert('Service ' + service);
-				    
+                            angular.forEach(response.data.services, function(service, i) {       
 				    var objectService = {          
 					id: service.guid,                                   
 					name: service.name,                                  
@@ -163,18 +133,13 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 					supportURL:'https://support.'+service.service_plan.service.label+'.com/',                                                                                  
                                         docsURL: 'http://docs.run.pivotal.io/marketplace/services/'+service.service_plan.service.label+'.html'                                                     
                                     };                                                           
-				    
-				    //window.alert('objectService ' + objectService);
-
+			       
                                     $scope.services.push(objectService);                          
                                 });                                                              
                         }                                                                     
-		    }, function(err) {                                                      
-			//$scope.getRoutesForTheSpace();                                     
-			messageService.addMessage('danger', 'The space summary has not been loaded.');                                                                                         
-			$log.error(err.data.description);                                   
+		    }, function(err) {                                                                                   messageService.addMessage('danger', 'The space summary has not been loaded.');                                                                                         
+			$log.error(err.data.description);                                
 		    }); 
-		//window.alert('q :'+Object.keys(q));
 		return q;  
 	    };    
 	    
@@ -184,11 +149,8 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 
 	    $scope.getAuditorsForTheSpace = function() {
 		spaceService.getAuditorsForTheSpace($scope.id).then(function(response) {
-			window.alert('get auditors for the space');                            
 			
 			var data = response.data;
-
-			//window.alert(data.total_results);
 
 			$scope.nrOfAuditors = response.data.total_results; 
 
@@ -214,11 +176,9 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 	    
 	    $scope.getDevelopersForTheSpace = function() {
 		spaceService.getDevelopersForTheSpace($scope.id).then(function(response) {
-                        window.alert('get developers for the space');
 
                         var data = response.data;
-
-                        //window.alert(data.total_results);                                       
+        
                         $scope.nrOfDevelopers = response.data.total_results;
 
                         angular.forEach(data.resources, function(user, key) {
@@ -242,12 +202,10 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 
 	    $scope.getDomainsForTheSpace = function() {
 		spaceService.getDomainsForTheSpace($scope.id).then(function(response) {
-                        window.alert('get domains for the space');
 			
                         var data = response.data;
-			
-                        //window.alert(data.total_results);                                                                                                             
-                        $scope.nrOfDomains = response.data.total_results;
+	                                                                                
+			$scope.nrOfDomains = response.data.total_results;
 
                         angular.forEach(data.resources, function(user, key) {
                                 var objectDomain = {
@@ -269,10 +227,8 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 
 	    $scope.getEventsForTheSpace = function() {
 		spaceService.getEventsForTheSpace($scope.id).then(function(response) {
-			window.alert('get events for the space');
-
-			var data = response.data;
-                        //window.alert(data.total_results);                                    
+	      
+			var data = response.data;                                    
                         $scope.nrOfEvents = response.data.total_results;
 
 			angular.forEach(data.resources, function(user, key) {
@@ -301,10 +257,8 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 
 	    $scope.getManagersForTheSpace = function() {
 		spaceService.getManagersForTheSpace($scope.id).then(function(response) {
-                        window.alert('get managers for the space');
-
                         var data = response.data;
-                        //window.alert(data.total_results);                                       
+          
                         $scope.nrOfManagers = response.data.total_results;
 
                         angular.forEach(data.resources, function(user, key) {
@@ -328,10 +282,8 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 
 	    $scope.getSecurityGroupsForTheSpace = function() {
 		spaceService.getSecurityGroupsForTheSpace($scope.id).then(function(response) {
-			window.alert('get security groups for the space');
 			
-			var data = response.data;
-                        //window.alert(data.total_results);                                                                                                                                      
+			var data = response.data;                                                                                                   
                         $scope.nrOfSecurityGroups = response.data.total_results;
 			
                         angular.forEach(data.resources, function(user, key) {
@@ -360,10 +312,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 
 	    $scope.getStagingSecurityGroupsForTheSpace = function() {
 		spaceService.getStagingSecurityGroupsForTheSpace($scope.id).then(function(response) {
-			window.alert('get staging security groups for the space');
-
                         var data = response.data;
-                        //window.alert(data.total_results); 
 			
                         $scope.nrOfStagingSecurityGroups = response.data.total_results;
 
@@ -391,15 +340,8 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 
 	    $scope.getStagingSecurityGroupsForTheSpace();
 	    
-	    $scope.retrieveRolesOfAllUsersForTheSpace = function() {                                  
-		//window.alert('retrieve roles of all users for the space');
-		
-		/*if ($scope.users.length > 0) {                                                      		    $scope.users.length = 0;                                                  
-		  }*/
-		
+	    $scope.retrieveRolesOfAllUsersForTheSpace = function() {                                
 		spaceService.retrieveRolesOfAllUsersForTheSpace($scope.id).then(function(response){                                                                                            
-			//window.alert('retrieve roles of all users');
-			
 			var data = response.data;                                           
 			$scope.nrOfSpaceUsers = data.total_results;                               
 			var userRoles = [];                                                       
@@ -427,8 +369,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 				    spaceAuditor: spaceAuditor,                              
 				    spaceId: $scope.spaceId,                                 
 				    currentUser: $scope.userName === user.entity.username      
-				};                                                                
-				//window.alert('objectUser ' + objectUser);
+				};                                                          
 
 				$scope.users.push(objectUser);      
 			    });                                                                   
@@ -441,13 +382,6 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 	    
 	    $scope.retrieveRolesOfAllUsers = function() {                                     
 		
-		//window.alert('retrieve roles of all users');
-		
-		// clear spaces array on reload                                             
-		/*if ($scope.usersOrganization.length > 0) {                                   
-		    $scope.usersOrganization.length = 0;                                     
-		    }*/
-		
 		organizationService.retrieveRolesOfAllUsersForTheOrganization($scope.organizationId).then(function(response){                                                                 
 			var data = response.data;                                                 
 			angular.forEach(data.resources, function(userOrg, key) {            
@@ -458,8 +392,6 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 				var spaceDeveloper = false;                                 
 				var spaceAuditor = false;                                     
 				var spaceUser = false;                                            
-				//window.alert(data.resources);
-				
 				angular.forEach(userOrg.entity.organization_roles, function(userRole, key) {                                                                                 
 					if (userRole === 'org_manager'){                   
 					    orgManager = true;                               
@@ -487,9 +419,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 					    spaceUser = spaceAuditor || spaceDeveloper || spaceManager;                                                                                      
 					}                                                      
 				    });    
-				
-				//window.alert('object user: ' + userOrg.entity.username);
-
+			       
 				var objectUser = {                                            
 				    id: userOrg.metadata.guid,                                 
 				    name: userOrg.entity.username,                          
@@ -503,9 +433,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 				    orgId: $scope.organizationId,                            
 				    spaceId: $scope.id,                                       
 				    currentUser: $scope.currentUser === userOrg.entity.username
-				};                           
-
-				//window.alert('object user ' + objectUser);
+				};                          
 
 				if (!spaceUser){                                            
 				    $scope.usersOrganization.push(objectUser);               
@@ -518,8 +446,6 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 			$log.error(err.data.description);                                        
 		    });                                                                          
 	    };
-	    
-	    //$scope.retrieveRolesOfAllUsers();     
 	    
 	    $scope.showApp = function(appId, event) {                                                   
 		window.alert(appId);

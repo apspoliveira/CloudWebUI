@@ -45,6 +45,8 @@ angular.module('app.serviceInstance').controller('ServiceInstanceDetailsCtrl', [
 	    $scope.permissions = [];
 
 	    $scope.sharedFrom = [];
+
+	    $scope.sharedTo = [];
 	    
 	    $scope.getServiceInstance = function () {
 		window.alert('get service instance ' + $scope.id);
@@ -247,7 +249,7 @@ angular.module('app.serviceInstance').controller('ServiceInstanceDetailsCtrl', [
 	    
 	    $scope.getSharedToForTheServiceInstance = function() {
 		window.alert('service instance get shared to');
-                var getServiceInstancePromise = serviceInstanceService.getSharedFromForServiceInstance($scope.id);
+                var getServiceInstancePromise = serviceInstanceService.getSharedToForServiceInstance($scope.id);
                 var promises = [];
 		q = getServiceInstancePromise.then(function(response) {
                         window.alert('shared to were loaded '+response.data.length);
@@ -257,10 +259,10 @@ angular.module('app.serviceInstance').controller('ServiceInstanceDetailsCtrl', [
                             $scope.serviceKeys = response.data.resources;
                             angular.forEach(response.data.resources, function(sharedTo, i) {
 				    var objectSharedTo = {
-					space_guid: response.data.space_guid,
-					space_name: response.data.space_name,
-					organization_name: response.data.organization_name,
-					bound_app_count: response.data.bound_app_count
+					space_guid: sharedTo.space_guid,
+					space_name: sharedTo.space_name,
+					organization_name: sharedTo.organization_name,
+					bound_app_count: sharedTo.bound_app_count
 				    }
 				});
 			    $scope.sharedTo.push(objectSharedTo);
@@ -270,4 +272,5 @@ angular.module('app.serviceInstance').controller('ServiceInstanceDetailsCtrl', [
                         $log.error(err.data.description);
                     });
 	    }
+	    $scope.getSharedToForTheServiceInstance();
 	}]);

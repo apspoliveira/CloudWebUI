@@ -36,6 +36,9 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 	    $scope.securityGroups = [];
 	    $scope.nrOfSecurityGroups = 0;
 
+	    $scope.stagingSecurityGroups = [];
+	    $scope.nrOfStagingSecurityGroups = 0;
+
             $scope.userName = localStorage.getItem('userName');
 	    
             $scope.showOrphanRoute = false;
@@ -354,6 +357,39 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 	    }
 	    
 	    $scope.getSecurityGroupsForTheSpace();
+
+	    $scope.getStagingSecurityGroupsForTheSpace = function() {
+		spaceService.getStagingSecurityGroupsForTheSpace($scope.id).then(function(response) {
+			window.alert('get staging security groups for the space');
+
+                        var data = response.data;
+                        //window.alert(data.total_results); 
+			
+                        $scope.nrOfStagingSecurityGroups = response.data.total_results;
+
+                        angular.forEach(data.resources, function(user, key) {
+				var objectStagingSecurityGroup = {
+                                    id: user.metadata.guid,
+                                    url: user.metadata.url,
+                                    name: user.entity.name,
+                                    running: user.entity.running_default,
+                                    staging: user.entity.staging_default
+                                }
+
+				angular.forEach(user.entity.rules, function(rule, key) {
+                                        objectStagingSecurityGroup.protocol = rule.protocol;
+                                        objectStagingSecurityGroup.ports = rule.ports;
+                                        objectStagingSecurityGroup.destination = rule.destination;
+                                    });
+
+                                $scope.stagingSecurityGroups.push(objectStagingSecurityGroup);
+                            });
+                    }, function(err) {
+                        $log.error(err.data.description);
+                    });
+            }
+
+	    $scope.getStagingSecurityGroupsForTheSpace();
 	    
 	    $scope.retrieveRolesOfAllUsersForTheSpace = function() {                                  
 		//window.alert('retrieve roles of all users for the space');

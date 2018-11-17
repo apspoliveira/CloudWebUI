@@ -5,7 +5,7 @@ angular.module('app.login')
 			    username: '',
 			    password: ''
 			};
-
+			
 			$scope.listMembers = function() {
                             authService.listMembers.then(function(response) {
                                     $location.path('/');

@@ -8,8 +8,6 @@ angular.module('app.space').factory('spaceService', ['$http', function($http) {
 
 	    var _getSpace = function(id) {
 
-		window.alert('get space');
-
                 // params                                                                  
 		var url = API_Endpoint+'/v2/spaces/'+id;
 
@@ -28,8 +26,6 @@ angular.module('app.space').factory('spaceService', ['$http', function($http) {
 	    }
 	    
             var _getSpaces = function() {
-
-		window.alert('get spaces');
 
                 // params                                                                         
                 var url = API_Endpoint+'/v2/spaces';
@@ -50,8 +46,6 @@ angular.module('app.space').factory('spaceService', ['$http', function($http) {
 	    
             var _getSpaceSummary = function(id) {
                 
-		window.alert('get space summary');
-		
                 // params                                                                  
 		var url= API_Endpoint+'/v2/spaces/' + id + '/summary';
 		
@@ -70,8 +64,6 @@ angular.module('app.space').factory('spaceService', ['$http', function($http) {
             };
 	    
             var _getServicesForTheSpace = function(id) {
-
-		window.alert('get service for the space');
 
                 // params                                                                    
 		
@@ -97,8 +89,6 @@ angular.module('app.space').factory('spaceService', ['$http', function($http) {
 	    
             var _getServicesInstancesForTheSpace = function(id) {
 
-		window.alert('get services instances for the space');
-
                 // params                                                                       
                 var url= API_Endpoint+'/v2/spaces/' + id + '/service_instances';
 		
@@ -117,8 +107,6 @@ angular.module('app.space').factory('spaceService', ['$http', function($http) {
 	    };
 	    
 	    var _getApplicationsForTheSpace = function(id) {
-
-		window.alert('get applications for the space');
 
 		// params			
 		
@@ -140,8 +128,6 @@ angular.module('app.space').factory('spaceService', ['$http', function($http) {
 
 	    var _getAuditorsForTheSpace = function(id) {
 
-		window.alert('get auditors for the space');
-
                 // params                                                                        
                 var url= API_Endpoint+'/v2/spaces/' + id + '/auditors';
 
@@ -161,8 +147,6 @@ angular.module('app.space').factory('spaceService', ['$http', function($http) {
 
 	    var _getDevelopersForTheSpace = function(id) {
 		
-		window.alert('get developers for the space');
-
                 // params                                                                        
                 var url= API_Endpoint+'/v2/spaces/' + id + '/developers';
 
@@ -181,9 +165,6 @@ angular.module('app.space').factory('spaceService', ['$http', function($http) {
 	    }
 
 	    var _getDomainsForTheSpace = function(id) {
-
-		window.alert('get domains for the space');
-
                 // params                                                                        
                 var url= API_Endpoint+'/v2/spaces/' + id + '/domains';
 
@@ -202,8 +183,6 @@ angular.module('app.space').factory('spaceService', ['$http', function($http) {
 	    }
 
 	    var _getEventsForTheSpace = function(id) {
-
-		window.alert('get events for the space');
 
                 // params                                                                        
                 var url= API_Endpoint+'/v2/spaces/' + id + '/events';
@@ -224,8 +203,6 @@ angular.module('app.space').factory('spaceService', ['$http', function($http) {
 
 	    var _getManagersForTheSpace = function(id) {
 
-		window.alert('get managers for the space');
-
 		// params                                                                        
                 var url= API_Endpoint+'/v2/spaces/' + id + '/managers';
 
@@ -244,8 +221,6 @@ angular.module('app.space').factory('spaceService', ['$http', function($http) {
 	    }
 
 	    var _getRoutesForTheSpace = function(id) {
-		
-		window.alert('get routes for the space');
 
 		// params                                                                        
                 var url= API_Endpoint+'/v2/spaces/' + id + '/routes';
@@ -266,8 +241,6 @@ angular.module('app.space').factory('spaceService', ['$http', function($http) {
 
 	    var _getSecurityGroupsForTheSpace = function(id) {
 
-		window.alert('get security groups for the space');
-
                 // params                                                                        
                 var url= API_Endpoint+'/v2/spaces/' + id + '/security_groups';
 
@@ -287,8 +260,6 @@ angular.module('app.space').factory('spaceService', ['$http', function($http) {
 
 	    var _getStagingSecurityGroupsForTheSpace = function(id) {
 
-		window.alert('get staging security groups for the space');
-
                 // params                                                                        
                 var url= API_Endpoint+'/v2/spaces/' + id + '/staging_security_groups';
 
@@ -307,9 +278,7 @@ angular.module('app.space').factory('spaceService', ['$http', function($http) {
 	    }
 	    
             var _retrieveRolesOfAllUsersForTheSpace = function(id) {
-		
-		window.alert('retrieve roles of all users for the space');
-
+	       
                 // params                                                                      
 		var url= API_Endpoint+'/v2/spaces/' + id + '/user_roles';
 		

@@ -269,12 +269,51 @@
             </div>
           </div>
 	  <div class="col-sm-12 col-md-6">
-	   <div class="panel panel-default">
-	     <div class="panel-heading clearfix">
-	       <h3 class="panel-title pull-left">Services <span class="label label-default">{{nrOfServices}}<span></h3>
-	      <a href="#/organizations/{{organizationId}}/spaces/{{spaceId}}/marketplace" class="btn btn-success pull-right"><i class="fa fa-plus"></i>&nbsp; Add a service</a>
-	    </div>
-	    <div class="table-responsive"><table class="table table-striped table-hover has-actions">
+            <div class="panel panel-default">
+              <div class="panel-heading clearfix">
+                <h3 class="panel-title pull-left">Staging Security Groups <span class="label label-default">{{nrOfStagingSecurityGroups}}<span></h3>
+                <a href="#/organizations/{{organizationId}}/spaces/{{spaceId}}/marketplace" class="btn btn-success pull-right"><i class="fa fa-plus"></i>&nbsp; Add a staging security group</a>
+              </div>
+              <div class="table-responsive"><table class="table table-striped table-hover has-actions">
+                  <thead>
+                    <tr>
+                      <th>Id</th>
+                      <th>Name</th>
+                      <th>Protocol</th>
+                      <th>Ports</th>
+                      <th>Destination</th>
+                      <th>Running</th>
+                      <th>Staging</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="stagingSecurityGroup in stagingSecurityGroups" ng-click="showService(service.id, $event)">
+                      <td>{{stagingSecurityGroup.id}}</td>
+                      <td>{{stagingSecurityGroup.name}}</td>
+                      <td>{{stagingSecurityGroup.protocol}}</td>
+                      <td>{{stagingSecurityGroup.ports}}</td>
+                      <td>{{stagingSecurityGroup.destination}}</td>
+                      <td>{{stagingSecurityGroup.running}}</td>
+                      <td>{{stagingSecurityGroup.staging}}</td>
+                      <td>
+                        <a class="action" href="#/organizations/{{organizationId}}/spaces/{{spaceId}}/serviceInstance/{{serviceInstance.id}}" title="Details"><i class="fa fa-lg fa-eye"></i></a>
+                        <a class="action" href="{{service.supportURL}}" target="_blank" title="Support"><i class="fa fa-lg fa fa-question"></i></a>
+                        <a class="action" href="{{service.docsURL}}" target="_blank" title="Docs"><i class="fa fa-lg fa fa-file"></i></a>
+                        <a class="action" href="{{service.dashboardUrl}}" target="_blank" title="Manage"><i class="fa fa-lg fa fa-cog"></i></a>
+                        <a class="action action-delete" ng-click="deleteServiceInstance(service)" title="Delete"><i class="fa fa-lg fa-trash"></i></a>
+                      </td>
+                    </tr>
+                  </tbody>
+              </table></div>
+            </div>
+          </div>
+	  <div class="col-sm-12 col-md-6">
+	    <div class="panel panel-default">
+	      <div class="panel-heading clearfix">
+		<h3 class="panel-title pull-left">Services <span class="label label-default">{{nrOfServices}}<span></h3>
+		<a href="#/organizations/{{organizationId}}/spaces/{{spaceId}}/marketplace" class="btn btn-success pull-right"><i class="fa fa-plus"></i>&nbsp; Add a service</a>
+	      </div>
+	      <div class="table-responsive"><table class="table table-striped table-hover has-actions">
 		<thead>
 		  <tr>
 		    <th>Name</th>

@@ -21,5 +21,6 @@ angular.module('app', [
                        'app.service',
                        'app.serviceBinding',
                        'app.serviceInstance',
-                       'app.user'
+                       'app.user',
+                       'app.privateDomain'
 		       ]);

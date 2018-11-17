@@ -2,8 +2,6 @@ angular.module('app.auth').factory('authInterceptorService', ['$q', '$location',
 	    var authInterceptorServiceFactory = {};
 	    
 	    var _request = function(config) {
-		
-		window.alert(config);
 
 		config.headers = config.headers || {};
 		
@@ -26,8 +24,6 @@ angular.module('app.auth').factory('authInterceptorService', ['$q', '$location',
 	    };
 	    
 	    var _responseError = function(rejection) {
-		
-		window.alert(rejection);
 
 		var timeOut = Date.now() - localStorage.getItem('lastTime');
 		if ($rootScope.nrOfUnauthorizedRequests === 0 && rejection.status === 401 && (localStorage.getItem('accessToken')!== null)) {

@@ -3,7 +3,6 @@ angular.module('app.organization')
 		['$rootScope', '$scope', '$modal', '$log', 'organizationService',
 		 function($rootScope, $scope, $modal, $log, organizationService) {
 			$scope.showContent = false;
-			//$scope.showOrgCreation = false;
 			$scope.organizations = [];
 			$scope.nrOfOrganizations = 0;
 			
@@ -26,8 +25,7 @@ angular.module('app.organization')
 			    }, function (err, status) {
 				$log.error(err);
 			    });
-			
-			
+						
 			$scope.addOrganization = function() {                    
 			    
 			    var organization = { };            

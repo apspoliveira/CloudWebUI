@@ -38,7 +38,7 @@
         <div class="panel panel-default">
           <div class="panel-heading clearfix">
             <h3 class="panel-title pull-left">Auditors <span class="label label-default">{{nrOfAuditors}}<span></h3>
-            <a href="#/organizations/{{organizationId}}/spaces/{{spaceId}}/marketplace" class="btn btn-success pull-right"><i class="fa fa-plus"></i>&nbsp; Add a auditor</a>
+            <a class="btn btn-success pull-right"><i class="fa fa-plus"></i>&nbsp; Add a auditor</a>
           </div>
           <div class="table-responsive"><table class="table table-striped table-hover has-actions">
               <thead>
@@ -50,18 +50,11 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="auditor in auditors" ng-click="showService(service.id, $event)">
+                <tr ng-repeat="auditor in auditors">
                   <td>{{auditor.id}}</td>
                   <td>{{auditor.admin}}</td>
                   <td>{{auditor.active}}</td>
                   <td>{{auditor.username}}</td>
-                  <td>
-                    <a class="action" href="#/organizations/{{organizationId}}/spaces/{{spaceId}}/serviceInstance/{{serviceInstance.id}}" title="Details"><i class="fa fa-lg fa-eye"></i></a>
-                    <a class="action" href="{{service.supportURL}}" target="_blank" title="Support"><i class="fa fa-lg fa fa-question"></i></a>
-                    <a class="action" href="{{service.docsURL}}" target="_blank" title="Docs"><i class="fa fa-lg fa fa-file"></i></a>
-		    <a class="action" href="{{service.dashboardUrl}}" target="_blank" title="Manage"><i class="fa fa-lg fa fa-cog"></i></a>
-                    <a class="action action-delete" ng-click="deleteServiceInstance(service)" title="Delete"><i class="fa fa-lg fa-trash"></i></a>
-                  </td>
                 </tr>
               </tbody>
           </table></div>
@@ -71,7 +64,7 @@
         <div class="panel panel-default">
           <div class="panel-heading clearfix">
             <h3 class="panel-title pull-left">Billing Managers <span class="label label-default">{{nrOfBillingManagers}}<span></h3>
-            <a href="#/organizations/{{organizationId}}/spaces/{{spaceId}}/marketplace" class="btn btn-success pull-right"><i class="fa fa-plus"></i>&nbsp; Add a billing manager</a>
+            <a class="btn btn-success pull-right"><i class="fa fa-plus"></i>&nbsp; Add a billing manager</a>
           </div>
           <div class="table-responsive"><table class="table table-striped table-hover has-actions">
               <thead>
@@ -83,18 +76,11 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="billingManager in billingManagers" ng-click="showService(service.id, $event)">
+                <tr ng-repeat="billingManager in billingManagers">
                   <td>{{billingManager.id}}</td>
                   <td>{{billingManager.admin}}</td>
                   <td>{{billingManager.active}}</td>
                   <td>{{billingManager.username}}</td>
-                  <td>
-                    <a class="action" href="#/organizations/{{organizationId}}/spaces/{{spaceId}}/serviceInstance/{{serviceInstance.id}}" title="Details"><i class="fa fa-lg fa-eye"></i></a>
-                    <a class="action" href="{{service.supportURL}}" target="_blank" title="Support"><i class="fa fa-lg fa fa-question"></i></a>
-		     <a class="action" href="{{service.docsURL}}" target="_blank" title="Docs"><i class="fa fa-lg fa fa-file"></i></a>
-                     <a class="action" href="{{service.dashboardUrl}}" target="_blank" title="Manage"><i class="fa fa-lg fa fa-cog"></i></a>
-                     <a class="action action-delete" ng-click="deleteServiceInstance(service)" title="Delete"><i class="fa fa-lg fa-trash"></i></a>
-                  </td>
                 </tr>
               </tbody>
           </table></div>
@@ -116,19 +102,11 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="manager in managers" ng-click="showService(service.id, $event)">
+                <tr ng-repeat="manager in managers">
                   <td>{{manager.id}}</td>
                   <td>{{manager.admin}}</td>
                   <td>{{manager.active}}</td>
                   <td>{{manager.username}}</td>
-                  <td>
-                    <a class="action" href="#/organizations/{{organizationId}}/spaces/{{spaceId}}/serviceInstance/{{serviceInstance.id}}" title="Details"><i class="fa fa-lg fa-eye"></i></a>
-                    <a class="action" href="{{service.supportURL}}" target="_blank" title="Support"><i class="fa fa-lg fa fa-question"></i></a>
-                    <a class="action" href="{{service.docsURL}}" target="_blank" title="Docs"><i class="fa fa-lg fa fa-file"></i></a>
-                    <a class="action" href="{{service.dashboardUrl}}" target="_blank" title="Manage"><i class="fa fa-lg fa fa-cog"></i></a>
-                    <a class="action action-delete" ng-click="deleteServiceInstance(service)" ti\
-tle="Delete"><i class="fa fa-lg fa-trash"></i></a>
-                  </td>
                 </tr>
               </tbody>
           </table></div>
@@ -138,7 +116,7 @@ tle="Delete"><i class="fa fa-lg fa-trash"></i></a>
           <div class="panel panel-default">
             <div class="panel-heading clearfix">
               <h3 class="panel-title pull-left">Private Domains <span class="label label-default">{{nrOfPrivateDomains}}<span></h3>
-              <a href="#/organizations/{{organizationId}}/spaces/{{spaceId}}/marketplace" class="btn btn-success pull-right"><i class="fa fa-plus"></i>&nbsp; Add a private domain</a>
+              <a class="btn btn-success pull-right"><i class="fa fa-plus"></i>&nbsp; Add a private domain</a>
             </div>
             <div class="table-responsive"><table class="table table-striped table-hover has-actions">
 		<thead>
@@ -149,17 +127,10 @@ tle="Delete"><i class="fa fa-lg fa-trash"></i></a>
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="privateDomain in privateDomains" ng-click="showService(service.id, $event)">
+                <tr ng-repeat="privateDomain in privateDomains">
                   <td>{{privateDomain.id}}</td>
                   <td>{{privateDomain.name}}</td>
                   <td>{{privateDomain.owning_organization_guid}}</td>
-                  <td>
-                    <a class="action" href="#/organizations/{{organizationId}}/spaces/{{spaceId}}/serviceInstance/{{serviceInstance.id}}" title="Details"><i class="fa fa-lg fa-eye"></i></a>
-                    <a class="action" href="{{service.supportURL}}" target="_blank" title="Support"><i class="fa fa-lg fa fa-question"></i></a>
-                    <a class="action" href="{{service.docsURL}}" target="_blank" title="Docs"><i class="fa fa-lg fa fa-file"></i></a>
-                    <a class="action" href="{{service.dashboardUrl}}" target="_blank" title="Manage"><i class="fa fa-lg fa fa-cog"></i></a>
-                    <a class="action action-delete" ng-click="deleteServiceInstance(service)" title="Delete"><i class="fa fa-lg fa-trash"></i></a>  
-		  </td>
                 </tr>
               </tbody>
             </table></div>
@@ -172,7 +143,7 @@ tle="Delete"><i class="fa fa-lg fa-trash"></i></a>
               <a href="#/organizations/{{organizationId}}/spaces/{{spaceId}}/marketplace" class="btn btn-success pull-right"><i class="fa fa-plus"></i>&nbsp; Add a service</a>
             </div>
             <div class="table-responsive"><table class="table table-striped table-hover has-actions">
-                <thead>
+		<thead>
                   <tr>
                     <th>Id</th>
                     <th>Label</th>
@@ -193,7 +164,7 @@ tle="Delete"><i class="fa fa-lg fa-trash"></i></a>
               <tbody>
                 <tr ng-repeat="service in services" ng-click="showService(service.id,$event)">
                   <td>{{service.id}}</td>
-                  <td>{{service.label}}</td>
+                  <td><a href="#/organizations/{{id}}/services/{{service.id}}">{{service.label}}</a></td>
                   <td>{{service.provider}}</td>
 		  <td>{{service.description}}</td>
 		  <td>{{service.long_description}}</td>
@@ -221,7 +192,7 @@ tle="Delete"><i class="fa fa-lg fa-trash"></i></a>
           <div class="panel panel-default">
             <div class="panel-heading clearfix">
               <h3 class="panel-title pull-left">Space Quota Definitions <span class="label label-default">{{nrOfSpaceQuotaDefinitions}}<span></h3>
-              <a href="#/organizations/{{organizationId}}/spaces/{{spaceId}}/marketplace" class="btn btn-success pull-right"><i class="fa fa-plus"></i>&nbsp; Add a space quota definition</a>
+              <a class="btn btn-success pull-right"><i class="fa fa-plus"></i>&nbsp; Add a space quota definition</a>
             </div>
             <div class="table-responsive"><table class="table table-striped table-hover has-actions">
 		<thead>
@@ -254,13 +225,6 @@ tle="Delete"><i class="fa fa-lg fa-trash"></i></a>
 		  <td>{{spaceQuotaDefinition.app_task_limit}}</td>
 		  <td>{{spaceQuotaDefinition.total_service_key}}</td>
 		  <td>{{spaceQuotaDefinition.total_reserved_route_ports</td>
-		  <td>
-                    <a class="action" href="#/organizations/{{organizationId}}/spaces/{{spaceId}}/serviceInstance/{{serviceInstance.id}}" title="Details"><i class="fa fa-lg fa-eye"></i></a>
-                    <a class="action" href="{{service.supportURL}}" target="_blank" title="Support"><i class="fa fa-lg fa fa-question"></i></a>
-                    <a class="action" href="{{service.docsURL}}" target="_blank" title="Docs"><i class="fa fa-lg fa fa-file"></i></a>
-                    <a class="action" href="{{service.dashboardUrl}}" target="_blank" title="Manage"><i class="fa fa-lg fa fa-cog"></i></a>
-                    <a class="action action-delete" ng-click="deleteServiceInstance(service)" title="Delete"><i class="fa fa-lg fa-trash"></i></a>
-                  </td>
                 </tr>
               </tbody>
             </table></div>
@@ -360,17 +324,7 @@ class="fa fa-lg fa fa-file"></i></a>
                     <a class="action action-delete" ng-click="deleteServiceInstance(service)" title="Delete"><i class="fa fa-lg fa-trash"></i></a>
                   </td>
                 </tr>
-              </tbody>
-		<!--<tbody>            
-		  <tr ng-repeat="sharedDomain in sharedDomains | orderBy:name:false">
-		    <td>{{sharedDomain.entity.name}} <span class="label label-default">shared</span></td>
-		    <td>&nbsp;</td>
-		  </tr>
-		  <tr ng-repeat="privateDomain in privateDomains | orderBy:name:false">
-		    <td>{{privateDomain.entity.name}}</td>
-		    <td><a class="action action-delete" ng-click="deleteDomain(privateDomain)"><i class="fa fa-lg fa-trash"></i></a></td>
-		  </tr>
-		</tbody>-->
+		</tbody>
 	    </table></div>
 	  </div><!-- /.panel -->
 	</div>	
@@ -456,7 +410,7 @@ class="fa fa-lg fa fa-file"></i></a>
                   </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="usage in instanceUsage" ng-click="showService(service.id, $event)">
+                <tr ng-repeat="usage in instanceUsage">
                   <td>{{usage.instance_usage}}</td>
                 </tr>
               </tbody>
@@ -475,7 +429,7 @@ class="fa fa-lg fa fa-file"></i></a>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="usage in memoryUsage" ng-click="showService(service.id, $event)">
+                  <tr ng-repeat="usage in memoryUsage">
                     <td>{{usage.memory_usage}}</td>
                   </tr>
 		</tbody>

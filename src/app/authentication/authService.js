@@ -61,11 +61,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
 
                 $http.get(UAA_Endpoint+'/oauth/authorize', data, { headers: headers }).success(function(response) {
                         authorization = response;
-			//window.alert(response.Cache-Control);
 			window.alert(Object.keys(response));
-			/*window.alert(response.X-XSS-Protection);
-			window.alert(response.X-Frame-Options);
-			window.alert(response.X-Content-Type-Options);*/
                     }).error(function(err, status) {
                             window.alert('Authorization ' + err + ' ' + status);
                         });
@@ -113,7 +109,6 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
 		
                 $http.get(UAA_Endpoint+'/oauth/authorize', data, { headers: headers }, params).success(function(response, status) {
                         authorization = response;
-                        window.alert(response.Location + ' ' + status);
                     }).error(function(err, status) {
                             window.alert('Authorization ' + err + ' ' + status);
 			});
@@ -134,12 +129,6 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
                         window.alert(Object.keys($http.defaults.headers));
 			window.alert(statusText);
 			authorization = data;
-			/*window.alert(status);
-			window.alert(Object.keys(headers));
-			window.alert(data.issuer);
-			window.alert(data.response_types_supported);
-			window.alert(data.claims_supported);
-			window.alert(data.service_documentation);*/
                     }).error(function(data, status, headers, config) {
                             window.alert('Authorization ' + data + ' ' + status + ' ' + headers + ' ' + config);
                         });
@@ -151,7 +140,6 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
 		
 		// data to post                                                                  
 		var data = {
-		    //'client_id': 'cf',
 		    'grant_type': 'password',
 		    'username': loginData.username,
 		    'password': loginData.password
@@ -210,13 +198,11 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
 		var data = {
 		    'grant_type': 'client_credentials',
 		    'client_id': '0bac87cc-233a-4f91-b82f-75eaf3898268',
-		    //'client_secret': 'adminclientsecret',
 		    'token_format': 'opaque'
 		}
 		var headers = {
 		    'Content-Type': 'application/x-www-form-urlencoded',
-		    'Accept': 'application/json'//,
-		    //'Authorization': 'Basic Y2Y6'
+		    'Accept': 'application/json'
 		};
 		data = $.param(data);
 		$http.post(UAA_Endpoint+'/oauth/token', data, { headers: headers }).success(function(response, status) {
@@ -306,7 +292,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
 			    deferred.reject(response);
 			}
                     }).error(function(err, status) {
-                            window.alert(/*Object.keys(*/err/*)*/ + ' ' + status);
+                            window.alert(err + ' ' + status);
                             $log.error('Definicion del error');
                             $log.error(err);
 			    
@@ -1002,9 +988,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
                 var data = {
 		    'name': '',
 		    'type': 'saml',
-		    'originKey': ''//,
-		    //'config.metaDataLocation': '',
-		    //'config.linkText': ''
+		    'originKey': ''
 		}
 		
 		// http headers                                                            
@@ -1015,12 +999,9 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
                     'X-Identity-Zone-Subdomain': ''
                 };
 
-		//var params = {
-		//}
-
 		data = $.param(data);
 		
-                $http.post(UAA_Endpoint+'/identity-providers', data, { headers: headers }/*, params*/).success(function(response)  {
+                $http.post(UAA_Endpoint+'/identity-providers', data, { headers: headers }).success(function(response)  {
 			window.alert(response);
 		    }).error(function(err, status) {
 			    window.alert('Identity' + err + ' ' + status);
@@ -1035,9 +1016,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
                 var data = {
                     'name': '',
                     'type': 'ldap',
-                    'originKey': ''//,
-                    //'config.metaDataLocation': '',
-                    //'config.linkText': ''
+                    'originKey': ''
                 }
 
                 // http headers                                                                   
@@ -1068,11 +1047,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
                 var data = {
                     'name': '',
                     'type': 'oauth2.0',
-                    'originKey': ''//,
-                    //'config.authUrl': '',
-                    //'config.tokenUrl': '',
-		    //'config.relyingPartyId': '',
-		    //'config.relyingPartySecret': ''
+                    'originKey': ''
                 }
 
                 // http headers                                                  
@@ -1352,8 +1327,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
 
                 var data = {
 		    'name': '',
-		    'config': ''//,
-		    //'config.metadataLocation': ''
+		    'config': ''
                 }
 
                 // http headers                                                                   
@@ -1582,7 +1556,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
 		var deferred = $q.defer();
 		
                 var data = {
-		} //uaaOptions;
+		}
 		
 		// http headers                                                                   
                 var headers = {
@@ -1604,7 +1578,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
                 var deferred = $q.defer();
 
                 var data = {
-		}//uaaOptions;
+		}
 
 		// http headers                                                         
                 var headers = {
@@ -1762,7 +1736,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
 		var deferred = $q.defer();
 
                 var data = {
-		}// uaaOptions;
+		}
 
                 // http headers                                                          
 		var headers = {
@@ -1808,7 +1782,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
                 var deferred = $q.defer();
 
                 var data = {
-		}//uaaOptions;
+		}
 
 		// http headers                                                            
 		var headers = {
@@ -1831,7 +1805,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
                 var deferred = $q.defer();
 		
                 var data = {
-		}//uaaOptions;
+		}
 		
 		// http headers                                                             
 		var headers = {
@@ -1926,7 +1900,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
                 var deferred = $q.defer();
 
                 var data = {
-		}//uaaOptions;
+		}
 
                 // http headers                                                            
 		var headers = {
@@ -1997,7 +1971,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
                 var deferred = $q.defer();
 		
                 var data = { 
-		} //uaaOptions;
+		}
 		
                 // http headers                                                                  
                 var headers = {
@@ -2020,7 +1994,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
                 var deferred = $q.defer();
 		
 		var data = {
-		}//uaaOptions;
+		}
 		
                 // http headers                                                                  
                 var headers = {
@@ -2043,7 +2017,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
                 var deferred = $q.defer();
 		
                 var data = {
-		}//uaaOptions;
+		}
 
                 // http headers                                                                  
                 var headers = {
@@ -2067,7 +2041,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
                 var deferred = $q.defer();
 		
                 var data = {
-		}//uaaOptions;
+		}
 		
                 // http headers                                                                  
                 var headers = {
@@ -2090,7 +2064,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
                 var deferred = $q.defer();
 
                 var data = {
-		}//uaaOptions;
+		}
 		
                 // http headers                                                                  
                 var headers = {
@@ -2113,7 +2087,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
                 var deferred = $q.defer();
 
                 var data = {
-		}//uaaOptions;
+		}
 		
                 // http headers                                                                  
                 var headers = {
@@ -2136,7 +2110,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
                 var deferred = $q.defer();
 
                 var data = {
-		}//uaaOptions;
+		}
 		
                 // http headers                                                                  
                 var headers = {
@@ -2159,7 +2133,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
                 var deferred = $q.defer();
 
                 var data = {
-		}//uaaOptions;
+		}
 
                 // http headers                                                                  
                 var headers = {
@@ -2182,7 +2156,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
                 var deferred = $q.defer();
 
                 var data = {
-		}//uaaOptions;
+		}
 
                 // http headers                                                                  
                 var headers = {

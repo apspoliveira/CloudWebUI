@@ -3,7 +3,6 @@ angular.module('app.organization')
 		['$rootScope', '$scope', '$modal', '$log', 'organizationService',
 		 function($rootScope, $scope, $modal, $log, organizationService) {
 			$scope.showContent = false;
-			//$scope.showOrgCreation = false;
 			$scope.organizations = [];
 			$scope.nrOfOrganizations = 0;
 			
@@ -63,36 +62,36 @@ angular.module('app.organization')
 				window.open('#/organizations/' + orgId);                                                     
 			    }else{                                                                                           
 				window.location = '#/organizations/' + orgId;                                                
-			}                                                                                                
+			    }                                                                                                
 			};
-		    
-		    $scope.editOrganization = function(org) {                                                                                 
-			var organization = {                                                 
-			    'id' : org.id,                                 		    
+			
+			$scope.editOrganization = function(org) {                                                                                 
+			    var organization = {                                                 
+				'id' : org.id,                                 		    
 			    'name' : org.name,                                               
 			    'quota_definition_guid' : org.quota_definition_guid                   
 			};                                                                                                                                                
-			/*var modalInstance = $modal.open({                                   
-			  templateUrl: 'app/organization/organizationEdit.html',      
-			  controller: 'OrganizationEditCtrl',                          
-			  resolve: {                                                  
-			  organization: function() {                              
-			  return organization;                                  
-			  }                                                         
-			  }                                                            
-			  });                                                                                                                                                   
-			  modalInstance.result.then(function(editedOrganization) {             
-			  var orgIdx = $scope.organizations.indexOf(org);              
-			  $rootScope.organizations[orgIdx].name = editedOrganization.name; 
-			  });*/    
-		    }
+			    /*var modalInstance = $modal.open({                                   
+			      templateUrl: 'app/organization/organizationEdit.html',      
+			      controller: 'OrganizationEditCtrl',                          
+			      resolve: {                                                  
+			      organization: function() {                              
+			      return organization;                                  
+			      }                                                         
+			      }                                                            
+			      });                                                                                                                                                   
+			      modalInstance.result.then(function(editedOrganization) {             
+			      var orgIdx = $scope.organizations.indexOf(org);              
+			      $rootScope.organizations[orgIdx].name = editedOrganization.name; 
+			      });*/    
+			}
 		    
-		    $scope.deleteOrganization = function(org) {   
+			$scope.deleteOrganization = function(org) {   
+			    
+			    var organization = {                                  
+				'id' : org.id,                 
+				'name' : org.name,
+				'quota_definition_guid' : org.quota_definition_guid                                           };
+			};
 			
-			var organization = {                                  
-			    'id' : org.id,                 
-			    'name' : org.name,
-			    'quota_definition_guid' : org.quota_definition_guid                                           };
-		    };
-		    
 		    }]);

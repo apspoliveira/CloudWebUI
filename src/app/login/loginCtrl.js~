@@ -609,6 +609,15 @@ angular.module('app.login')
                                 });
                         }
 
+			$scope.userTokenGrant = function() {
+			    authService.userTokenGrant().then(function(response) {
+                                    $location.path('/');
+                                },
+                                function (err) {
+                                    $log.error(err);
+                                });
+			}
+
 			$scope.authorizationCode = function() {
                             authService.authorizationCode().then(function(response) {
                                     $location.path('/');

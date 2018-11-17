@@ -2,7 +2,7 @@ angular.module('app').run(['$rootScope', '$location', '$route', 'authService', f
 	    $rootScope.nrOfUnauthorizedRequests = 0;
 	    $rootScope.rootFields = {};
 
-	    authService.fillAuthData();
+	    /*authService.fillAuthData();
 
 	    // redirect the user to the login page if he is not logged in                    
 	    $rootScope.$on('$routeChangeStart', function(event) {
@@ -15,5 +15,5 @@ angular.module('app').run(['$rootScope', '$location', '$route', 'authService', f
 			$location.path('/login');
 			$route.reload();
 		    }
-		});
+		    });*/
 	}]);

@@ -1,0 +1,69 @@
+<div id="login">
+  <div id="login-logo">CF Web UI</div>
+  <div id="login-content">
+    <h1>Login</h1>
+    <messages></messages>
+    <form class="form-horizontal" role="form" name="formLogin">
+      <div class="form-group">
+        <div class="col-md-12">
+          <input type="text" class="form-control" placeholder="Username" required ng-model="loginData.username">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-12">
+          <input type="password" class="form-control" placeholder="Password" required ng-model="loginData.password">
+        </div>
+      </div>
+      <div class="form-group">
+	  <div class="col-md-12">
+	    <input type="submit" class="btn btn-info btn-block" value="Authorize" ng-click="getCode()" ng-disabled="formLogin.$invalid">
+	  </div>
+	  </div>
+      <div class="form-group">
+        <div class="col-md-12">
+          <input type="submit" class="btn btn-info btn-block" value="Get Clients" ng-click="getClients()" ng-disabled="formLogin.$invalid">
+        </div>
+      </div>
+       <div class="form-group">
+        <div class="col-md-12">
+          <input type="submit" class="btn btn-info btn-block" value="Get Users" ng-click="getUsers()" ng-disabled="formLogin.$invalid">
+        </div>
+      </div>
+      <div class="form-group">
+            <div class="col-md-12">
+              <input type="submit" class="btn btn-info btn-block" value="Add User" ng-click="addUser()" ng-disabled="formLogin.$invalid">
+            </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-12">
+          <input type="submit" class="btn btn-info btn-block" value="Create Group" ng-click="createGroup()" ng-disabled="formLogin.$invalid">
+        </div>
+      </div>
+       <div class="form-group">
+        <div class="col-md-12">
+          <input type="submit" class="btn btn-info btn-block" value="List Groups" ng-click="listGroups()" ng-disabled="formLogin.$invalid">
+        </div>
+      </div>
+       <div class="form-group">
+         <div class="col-md-12">
+           <input type="submit" class="btn btn-info btn-block" value="Groups External" ng-click="groupsExternal()" ng-disabled="formLogin.$invalid">
+         </div>
+       </div>
+       <div class="form-group">
+         <div class="col-md-12">
+           <input type="submit" class="btn btn-info btn-block" value="Add Member" ng-click="addMember()" ng-disabled="formLogin.$invalid">
+         </div>
+       </div>
+        <div class="form-group">
+         <div class="col-md-12">
+           <input type="submit" class="btn btn-info btn-block" value="client_credentials" ng-click="client_credentials()" ng-disabled="formLogin.$invalid">
+         </div>
+       </div>
+      <div class="form-group">
+        <div class="col-md-12">
+          <input type="submit" class="btn btn-info btn-block" value="Login" ng-click="login()" ng-disabled="formLogin.$invalid">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

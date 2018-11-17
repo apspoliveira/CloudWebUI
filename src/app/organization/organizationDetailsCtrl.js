@@ -3,61 +3,61 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
             $scope.disableShow=true;
             $scope.name = '';
             $scope.id = $routeParams.organizationId;
-
+	    
             // organizations                                                                 
 	    $scope.quotaDefID = 0;
             $scope.organizationTotalQuota = 0;
             $scope.usedQuotaPercent = 0.0;
-
+	    
             // space info                                                                   
 	    $scope.spaces = [];
             $scope.nrOfSpaces = 0;
             $scope.spacesTotalQuota = 0;
-
+	    
             // domain info                                                                  
 	    $scope.sharedDomains = [];
             $scope.privateDomains = [];
 	    $scope.nrOfPrivateDomains = 0;
 	    $scope.domains = [];
             $scope.nrOfDomains = 0;
-
+	    
             // users                                                                         
 	    $scope.users = [];
             $scope.nrOfOrganizationUsers = 0;
 
 	    $scope.auditors = [];
 	    $scope.nrOfAuditors = 0;
-
+	    
 	    $scope.billingManagers = [];
 	    $scope.nrOfBillingManagers = 0;
-
+	    
 	    $scope.managers = [];
 	    $scope.nrOfManagers = 0;
-
+	    
 	    $scope.services = [];
 	    $scope.nrOfServices = 0;
 
 	    $scope.spaceQuotaDefinitions = [];
 	    $scope.nrOfSpaceQuotaDefinitions = 0;
-
+	    
 	    $scope.allUsers = [];
 	    $scope.nrOfAllUsers = 0;
 	    
 	    $scope.instanceUsage = [];
 	    $scope.memoryUsage = [];
-
+	    
             $scope.currentUser = {
                 name: localStorage.getItem('userName'),
                 currentManager: false
-		};
-
+	    };
+	    
 	    // get particular organization                                                   
 	    organizationService.getOrganization($scope.id).then(function(response) {
 		    
 		    var data = response.data;
 		    $scope.name = data.entity.name;
 		    $scope.quotaDefID = data.entity.quota_definition_guid;
-
+		    
 		    // get organization quota                                                    
                     organizationService.getQuotaForTheOrganization($scope.quotaDefID).then(function(response) {
 			    var data = response.data;
@@ -76,13 +76,9 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 	    
 	    $scope.getAuditorsForTheOrganization = function() {
 		organizationService.getAuditorsForTheOrganization($scope.id).then(function(response) {
-			window.alert('get auditors for the organization');
-			
                         var data = response.data;
                         $scope.nrOfAuditors = data.total_results;
 
-                        window.alert(data.resources);
-			
 			angular.forEach(data.resources, function(organization, key) {
 				var objectAuditor = {
 				    id: organization.metadata.guid,
@@ -100,18 +96,15 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 			$log.error(err.data.description);
 		    });	
 	    }
-
+	    
 	    $scope.getAuditorsForTheOrganization();
-
+	    
 	    $scope.getBillingManagersForTheOrganization = function() {
 		organizationService.getBillingManagersForTheOrganization($scope.id).then(function(response) {
-			window.alert('get billing managers for the organization');
-
+			
                         var data = response.data;
                         $scope.nrOfBillingManagers = data.total_results;
-
-			window.alert(data.resources);
-
+			
                         angular.forEach(data.resources, function(organization, key) {
                                 var objectBillingManager = {
 				    id: organization.metadata.guid,
@@ -124,23 +117,19 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 				
 				$scope.billingManagers.push(objectBillingManager);
 			    });
-
+			
 		    }, function(err) {
                         $log.error(err.data.description);
                     });
 	    }
-
+	    
 	    $scope.getBillingManagersForTheOrganization();
-
+	    
 	    $scope.getDomainsForTheOrganization = function() {
 		organizationService.getDomainsForTheOrganization($scope.id).then(function(response) {
-			window.alert('get domains for the organization');
-
 			var data = response.data;
                         $scope.nrOfDomains = data.total_results;
-
-			window.alert(data.resources);
-
+		       
                         angular.forEach(data.resources, function(organization, key) {
                                 var objectDomain = {
 				    id: organization.metadata.guid,
@@ -149,26 +138,22 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
                                     router_group_guid: organization.entity.router_group_guid,
                                     router_group_type: organization.entity.router_group_type
                                 }
-
+				
 				$scope.domains.push(objectDomain);
                             });
-
+			
                     }, function(err) {
                         $log.error(err.data.description);
                     });
 	    }
-
+	    
 	    $scope.getDomainsForTheOrganization();
 	    
 	    $scope.getManagersForTheOrganization = function() {
 		organizationService.getManagersForTheOrganization($scope.id).then(function(response) {
-			window.alert('get managers for the organization');
-
 			var data = response.data;
 			$scope.nrOfManagers = data.total_results;
-
-			window.alert(data.resources);
-
+		       
                         angular.forEach(data.resources, function(organization, key) {
 				var objectManager = {
 				    id: organization.metadata.guid,
@@ -178,26 +163,22 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
                                     default_space_guid: organization.entity.default_space_guid,
                                     username: organization.entity.username
 				}
-
+				
 				$scope.managers.push(objectManager);
 			    });
-
+			
 		    }, function(err) {
                         $log.error(err.data.description);
                     });
 	    }
-
+	    
 	    $scope.getManagersForTheOrganization();
-
+	    
 	    $scope.getPrivateDomainsForTheOrganization = function() {
 		organizationService.getPrivateDomainsForTheOrganization($scope.id).then(function(response) {
-			window.alert('get private domains for the organization');
-			
 			var data = response.data;
                         $scope.nrOfPrivateDomains = data.total_results;
-
-			window.alert(data.resources);
-
+			
                         angular.forEach(data.resources, function(organization, key) {
 				var objectPrivateDomain = {
                                     id: organization.metadata.guid,
@@ -208,23 +189,19 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 				
                                 $scope.privateDomains.push(objectPrivateDomain);
                             });
-
+			
                     }, function(err) {
                         $log.error(err.data.description);
                     });
 	    }
-
+	    
 	    $scope.getPrivateDomainsForTheOrganization();
-
+	    
 	    $scope.getServicesForTheOrganization = function() {
 		organizationService.getServicesForTheOrganization($scope.id).then(function(response) {
-			window.alert('get services for the organization');
-
 			var data = response.data;
                         $scope.nrOfServices = data.total_results;
-			
-			window.alert(data.resources);
-
+		       
 			angular.forEach(data.resources, function(organization, key) {
                                 var objectService = {
 				    id: organization.metadata.guid,
@@ -242,26 +219,22 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 				    service_broker_guid: organization.entity.service_broker_guid,
 				    plan_updateable: organization.entity.plan_updateable
 				}
-
+				
 				$scope.services.push(objectService);
                             });
-
+			
                     }, function(err) {
                         $log.error(err.data.description);
                     });
 	    }
-
+	    
 	    $scope.getServicesForTheOrganization();
 	    
 	    $scope.getSpaceQuotaDefinitionsForTheOrganization = function() {
 		organizationService.getSpaceQuotaDefinitionsForTheOrganization($scope.id).then(function(response) {
-			window.alert('get space quota definitions for the organization');
-			
 			var data = response.data;
 			$scope.nrOfSpaceQuotaDefinitions = data.total_results;
 			
-			window.alert(data.resources);
-
 			angular.forEach(data.resources, function(organization, key) {
                                 var objectSpaceQuotaDefinitions = {
 				    id: organization.metadata.guid,
@@ -284,18 +257,14 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
                         $log.error(err.data.description);
                     });
 	    }
-
+	    
 	    $scope.getSpaceQuotaDefinitionsForTheOrganization();
-
+	    
 	    $scope.getUsersForTheOrganization = function() {
 		organizationService.getAllUsersForTheOrganization($scope.id).then(function(response) {
-			window.alert('get users for the organization');
-			
 			var data = response.data;
 			$scope.nrOfAllUsers = data.total_results;
-			
-			window.alert(data.resources);
-			
+		       
 			angular.forEach(data.resources, function(user, key) {
 				var objectUser = {
                                     id: user.metadata.guid,
@@ -312,16 +281,12 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
                         $log.error(err.data.description);
                     });
 	    }
-
+	    
 	    $scope.getUsersForTheOrganization();
 
 	    $scope.getOrganizationInstanceUsageForTheOrganization = function() {
 		organizationService.getOrganizationInstanceUsage($scope.id).then(function(response) {
-			window.alert('get organization instance usage for the organization');
-
                         var data = response.data;
-
-                        window.alert(data.resources);
 
                         angular.forEach(data.resources, function(organization, key) {
 				var objectInstanceUsage = {
@@ -333,17 +298,13 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
                         $log.error(err.data.description);
                     });
 	    }
-
+	    
 	    $scope.getOrganizationInstanceUsageForTheOrganization();
 	    
 	    $scope.getOrganizationMemoryUsageForTheOrganization = function() {
 		organizationService.getOrganizationMemoryUsage($scope.id).then(function(response) {
-			window.alert('get organization memory usage for the organization');
-
                         var data = response.data;
-                        
-			window.alert(data.resources);
-
+			
                         angular.forEach(data.resources, function(organization, key) {
                                 var objectMemoryUsage = {
                                     memory_usage: organization.memory_usage
@@ -356,28 +317,19 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
             }
 	    
 	    $scope.getOrganizationMemoryUsageForTheOrganization();
-
+	    
 	    // get spaces for the organization                                       
 	    $scope.getSpacesForTheOrganization = function() {
-		// clear spaces array on reload                   
-		//if ($scope.spaces.length > 0) {                                             
-		//    $scope.spaces.length = 0;                                                                 }
 		organizationService.getSpacesForTheOrganization($scope.id).then(function(response) {                                                                                       
-			window.alert('get spaces for the organization');
-			
 			var data = response.data;                                          
 			$scope.nrOfSpaces = data.total_results;
-			
-			window.alert(data.resources);
-                        
+		       
 			// get summary for each space                                     
 			angular.forEach(data.resources, function(space, key) {            
-				window.alert('Space: ' + space.metadata.guid);
 				$scope.spaces.push(space.metadata.guid);                                    
 				spaceService.getSpaceSummary(space.metadata.guid).then(function(responseSpace) {                                                                            
-					window.alert(responseSpace);
 					var dataSpace = responseSpace.data;       
-
+					
 					// calculate space memory and stopped or started apps 
 					var memory = 0;                                       
 					var nrOfStartedApps = 0;                              
@@ -408,7 +360,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 					    nrOfCrashedApps: nrOfCrashedApps,                  
 					    nrOfServices: dataSpace.services.length             
 					};                                                   
-
+					
 					//$scope.spaces.push(objectSpace);                
 					for (var j = 0; j < $scope.spaces.length; j++) {   
 					    if ($scope.spaces[j] === objectSpace.id) {       
@@ -428,32 +380,26 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 		    });   		
 	    };
 	    $scope.getSpacesForTheOrganization();
-
+	    
 	    // get organization sharedDomains                                                     
             /*organizationService.getSharedDomainsForTheOrganization($scope.id).then(function(response) {                                                                                        
-		    var data = response.data;     
-		    $scope.nrOfDomains += data.total_results;                               
-		    $scope.sharedDomains = (data.resources);                               
-		}, function(err) {                                                         
-		    $log.error(err.data.description);                                       
-		});                                                                          
-	    
+	      var data = response.data;     
+	      $scope.nrOfDomains += data.total_results;                               
+	      $scope.sharedDomains = (data.resources);                               
+	      }, function(err) {                                                         
+	      $log.error(err.data.description);                                       
+	      });                                                                          
+	      
 	    // get organization privateDomains                                                    
 	    organizationService.getPrivateDomainsForTheOrganization($scope.id).then(function(response) {                                                                                     
-		    var data = response.data;
-		    $scope.nrOfDomains += data.total_results;                                
-		    $scope.privateDomains = data.resources;                                
-		}, function(err) {                                                         
-		    $log.error(err);                                                      
-		    });*/                       
+	    var data = response.data;
+	    $scope.nrOfDomains += data.total_results;                                
+	    $scope.privateDomains = data.resources;                                
+	    }, function(err) {                                                         
+	    $log.error(err);                                                      
+	    });*/                       
 	    
 	    $scope.retrieveRoleOfAllUsersForTheOrganization = function() {                       
-
-		// clear spaces array on reload                                              
-		//if ($scope.users.length > 0) {                                               
-		// $scope.users.length = 0;                                                     
-		//}
-
 		organizationService.retrieveRolesOfAllUsersForTheOrganization($scope.id).then(function(response){                                                                          
 			var data = response.data;                                             
 			$scope.nrOfOrganizationUsers = data.total_results;                  
@@ -462,7 +408,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 				var orgManager = false;                                   
 				var orgAuditor = false;                                          
                                 var billingManager = false;   
-
+				
 				angular.forEach(user.entity.organization_roles, function(userRole, key) {                                                                                         
 					if (userRole === 'org_manager'){                        
 					    orgManager = true;                                   
@@ -478,7 +424,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 					};                                                        
 					userRoles.push(objectRole);
 				    });
-
+				
                                 var objectUser = {                                          
 				    id: user.metadata.guid,                                 
 				    organizationId: $scope.id,                              
@@ -513,8 +459,22 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 		}else{                                                                                    
 		    window.location = '#/organizations/' + $scope.id + '/spaces/' + spaceId;               
 		}                                                                                           
-		};
+	    };
 
+	    $scope.showService = function(serviceId, event) {	
+		
+                if (event.ctrlKey==1){	       
+		    
+                    window.open('#/organizations/' + $scope.id + '/services/' + serviceId);    
+		    
+                }else{                                                                          		    
+                    window.location = '#/organizations/' + $scope.id + '/services/' + serviceId;
+		    
+                }			      
+		
+            };
+
+	    
 	    $scope.editSpace = function(space) {    
 	    };   
 
@@ -525,7 +485,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 		    'quota_definition_guid': $scope.quotaDefID                                           
 		};
 	    }
-
+	    
 	    $scope.deleteOrganization = function() {  
 		var organization = {
                     'id': $scope.id,
@@ -533,29 +493,29 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
                     'quota_definition_guid': $scope.quotaDefID
                 };
 	    }
-
+	    
 	    // add space                                                                                 
 	    $scope.addSpace = function() {                                                               
 		var space = {                                                                         
 		    'organizationId': $scope.id                                                          
 		};
 	    }
-
+	    
 	    // new domain                                                                                
 	    $scope.newDomain = function() {                                                            
 		var domain = {                                                                         
 		    'organizationID': $scope.id                                                         
 		};
 	    }
-
+	    
 	    // delete domain                                                                               
 	    $scope.deleteDomain = function (domain) {    
 	    };
-
+	    
 	    // delete space                                                                              
 	    $scope.deleteSpace = function (space) {    
 	    };
-
+	    
 	    $scope.addUser = function() {                                                  
 		var spaces = $scope.spaces;
 	    };   
@@ -563,42 +523,42 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 	    $scope.disassociateUser = function(user) {                                      
 		var spaces =  $scope.spaces;               
 	    };    
-
+	    
 	    $scope.addManager = function(username) {                                                   
 		var user = {                                                                            
 		    'organizationId': $scope.id,                                                         
 		    'name': username                                                                    
 		};
 	    };
-
+	    
 	    $scope.deleteManager = function(userId) {                                                   
 		var user = {                                                                           
 		    'organizationId': $scope.id,                                                        
 		    'id': userId                                                                         
 		};
 	    };  
-
+	    
 	    $scope.addBillingManager = function(username) {                                  
 		var user = {                                                                            
 		    'organizationId': $scope.id,                                                         
 		    'name': username                                                                      
 		};
 	    };
-
+	    
 	    $scope.deleteBillingManager = function(userId) { 
 		var user = {
                     'organizationId': $scope.id,
                     'id': userId
                 };
 	    };
-
+	    
 	    $scope.addAuditor = function(username) {                               
 		var user = {
                     'organizationId': $scope.id,
                     'name': username
 		};
 	    };
-
+	    
 	    $scope.deleteAuditor = function(userId) {  
 		var user = {
                     'organizationId': $scope.id,
@@ -610,5 +570,5 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 	    $scope.deleteUser = function (user) {      
 
 	    };
-
+	    
 	}]);

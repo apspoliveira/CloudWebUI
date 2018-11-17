@@ -107,7 +107,7 @@ angular.module('app.serviceInstance').factory('serviceInstanceService', ['$http'
 	    
 	    var _getSharedFromForServiceInstance = function(serviceInstanceId) {
 		window.alert('get shared from');
-
+		
                 // params                                                                   
 		var url = API_Endpoint+'/v2/service_instances/' + serviceInstanceId + '/shared_from';
 		
@@ -124,6 +124,26 @@ angular.module('app.serviceInstance').factory('serviceInstanceService', ['$http'
 		
                 return $http.get(url, config);
 	    }
+
+	    var _getSharedToForServiceInstance = function(serviceInstanceId) {
+		window.alert('get shared to');
+
+		// params                                                                         
+                var url = API_Endpoint+'/v2/service_instances/' + serviceInstanceId + '/shared_to';
+
+                // http headers                                             
+                var headers = {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'bearer ' + accessToken
+                };
+
+                var config = {
+                    headers: headers
+                };
+
+                return $http.get(url, config);
+	    }
 	    
 	    serviceInstanceServiceFactory.getServiceInstance = _getServiceInstance;
 	    serviceInstanceServiceFactory.getServiceBindingsForServiceInstance = _getServiceBindingsForServiceInstance;
@@ -131,6 +151,7 @@ angular.module('app.serviceInstance').factory('serviceInstanceService', ['$http'
 	    serviceInstanceServiceFactory.getRoutesForServiceInstance = _getRoutesForServiceInstance;
 	    serviceInstanceServiceFactory.getPermissionsForServiceInstance = _getPermissionsForServiceInstance;
 	    serviceInstanceServiceFactory.getSharedFromForServiceInstance = _getSharedFromForServiceInstance;
+	    serviceInstanceServiceFactory.getSharedToForServiceInstance = _getSharedToForServiceInstance;
 
 	    return serviceInstanceServiceFactory;
         }]);

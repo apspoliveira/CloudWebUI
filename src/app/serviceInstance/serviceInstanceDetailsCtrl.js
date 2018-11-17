@@ -1,4 +1,4 @@
-angular.module('app.serviceInstance').controller('ServiceInstanceDetailsCtrl', ['$rootScope', '$scope', '$routeParams', '$log', 'serviceInstanceService'/*, 'messageService'*/, function($rootScope, $scope, $routeParams, $log, serviceInstanceService/*, messageService*/) {
+angular.module('app.serviceInstance').controller('ServiceInstanceDetailsCtrl', ['$rootScope', '$scope', '$routeParams', '$log', 'serviceInstanceService', function($rootScope, $scope, $routeParams, $log, serviceInstanceService) {
 	    
 	    window.alert('service instance details');
 	    
@@ -92,7 +92,7 @@ angular.module('app.serviceInstance').controller('ServiceInstanceDetailsCtrl', [
 	    // api                                                       
 	    $scope.getRoutesForTheServiceInstance = function() {
 		var getServiceInstancePromise = serviceInstanceService.getRoutesForServiceInstance($scope.id);
-                //window.alert(getServiceInstancePromise);                                           
+                    
                 var promises = [];
                 q = getServiceInstancePromise.then(function(response) {
                         window.alert('populate routes: '+response.data.total_results);
@@ -144,7 +144,6 @@ angular.module('app.serviceInstance').controller('ServiceInstanceDetailsCtrl', [
                             $scope.serviceBindings = response.data.resources;
                             angular.forEach(response.data.resources, function(serviceBindings, i) {
                                     window.alert('service bindings name' + serviceBindings.entity.name);
-				    //window.alert(Object.keys(serviceBindings.entity));
 
 				    var objectServiceBindings = {
                                         id: serviceBindings.metadata.guid,
@@ -180,7 +179,7 @@ angular.module('app.serviceInstance').controller('ServiceInstanceDetailsCtrl', [
 	    // api                                                                             
 	    $scope.getServiceKeysForTheServiceInstance = function() {
 		var getServiceInstancePromise = serviceInstanceService.getServiceKeysForServiceInstance($scope.id);
-		//window.alert(getServiceInstancePromise);                                        
+	                                               
 		var promises = [];
 		q = getServiceInstancePromise.then(function(response) {
 			window.alert('service keys ' + response.data.total_results);

@@ -45,11 +45,31 @@ angular.module('app').config(['$routeProvider', function($routeProvider) {
 		  controller: 'ApplicationDetailsCtrl'
 		  })
 
+      .when('/organizations/:organizationId/services/:serviceId', {
+	      templateUrl: 'app/service/serviceDetails.html',
+		  controller: 'ServiceDetailsCtrl'
+		  })
+      
+      .when('/organizations/:organizationId/privateDomains/:privateDomainId', {
+	      templateUrl: 'app/privateDomain/privateDomainDetails.html',
+		  controller: 'PrivateDomainDetailsCtrl'
+		  })
+      
+      .when('/privateDomains', {
+	      templateUrl: 'app/privateDomain/privateDomainPreview.html',
+		  controller: 'PrivateDomainPreviewCtrl'
+		  })
+      
+      .when('/serviceBindings', {
+              templateUrl: 'app/serviceBinding/serviceBindingPreview.html',
+                  controller: 'ServiceBindingPreviewCtrl'
+		  })
+      
       .when('/marketplace', {
 	      templateUrl: 'app/marketplace/marketplaceAddService.html',
 		  controller: 'MarketplaceAddServiceCtrl'
 		  })
-
+      
       .when('/marketplace/:serviceId', {
 	      templateUrl: 'app/marketplace/marketplaceSelectServicePlan.html',
 		  controller: 'MarketplaceSelectServicePlanCtrl'
