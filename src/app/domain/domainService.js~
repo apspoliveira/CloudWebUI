@@ -14,7 +14,8 @@ angular.module('app.domain').factory('domainService', ['$http', function($http) 
 		// http headers                                                                           
 		headers = {
 		    'Accept': 'application/json',
-		    'Content-Type': 'application/json'
+		    'Content-Type': 'application/json',
+                    'Authorization': 'bearer ' + accessToken
 		};
 
 		var config = {
@@ -34,7 +35,8 @@ angular.module('app.domain').factory('domainService', ['$http', function($http) 
 		// http headers                                                                           
 		headers = {
 		    'Accept': 'application/json',
-		    'Content-Type': 'application/json'
+		    'Content-Type': 'application/json',
+                    'Authorization': 'bearer ' + accessToken
 		};
 
 		var config = {

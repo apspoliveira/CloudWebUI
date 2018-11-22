@@ -1,6 +1,4 @@
-angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$route', '$rootScope', '$scope', '$routeParams', '$log', 'organizationService', 'spaceService', function($route, $rootScope, $scope, $routeParams, $log, organizationService, spaceService) {
-	    $rootScope.rootFields.showContent = false;
-            $scope.disableShow=true;
+angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$route', '$rootScope', '$scope', '$routeParams', 'organizationService', 'spaceService', function($route, $rootScope, $scope, $routeParams, organizationService, spaceService) {
             $scope.name = '';
             $scope.id = $routeParams.organizationId;
 	    
@@ -67,12 +65,8 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
                                         $scope.organizationTotalQuota += organization.entity.memory_limit;
 				    }
 				});
-			}, function(err) {
-			    window.alert(err.data.description);
 			});
-                }, function (err) {
-                    window.alert(err.data.description);    
-		});
+                });
 	    
 	    $scope.getAuditorsForTheOrganization = function() {
 		organizationService.getAuditorsForTheOrganization($scope.id).then(function(response) {
@@ -92,8 +86,6 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 				$scope.auditors.push(objectAuditor);
 			    });
 			
-		    }, function(err) {
-			$log.error(err.data.description);
 		    });	
 	    }
 	    
@@ -118,9 +110,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 				$scope.billingManagers.push(objectBillingManager);
 			    });
 			
-		    }, function(err) {
-                        $log.error(err.data.description);
-                    });
+		    });
 	    }
 	    
 	    $scope.getBillingManagersForTheOrganization();
@@ -142,8 +132,6 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 				$scope.domains.push(objectDomain);
                             });
 			
-                    }, function(err) {
-                        $log.error(err.data.description);
                     });
 	    }
 	    
@@ -167,9 +155,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 				$scope.managers.push(objectManager);
 			    });
 			
-		    }, function(err) {
-                        $log.error(err.data.description);
-                    });
+		    });
 	    }
 	    
 	    $scope.getManagersForTheOrganization();
@@ -190,8 +176,6 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
                                 $scope.privateDomains.push(objectPrivateDomain);
                             });
 			
-                    }, function(err) {
-                        $log.error(err.data.description);
                     });
 	    }
 	    
@@ -223,8 +207,6 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 				$scope.services.push(objectService);
                             });
 			
-                    }, function(err) {
-                        $log.error(err.data.description);
                     });
 	    }
 	    
@@ -253,8 +235,6 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 				}
 				$scope.spaceQuotaDefinitions.push(objectSpaceQuotaDefinitions);
                             });
-                    }, function(err) {
-                        $log.error(err.data.description);
                     });
 	    }
 	    
@@ -277,8 +257,6 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 				
                                 $scope.allUsers.push(objectUser);
 			    });
-                    }, function(err) {
-                        $log.error(err.data.description);
                     });
 	    }
 	    
@@ -294,8 +272,6 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 				}
 				$scope.instanceUsage.push(objectInstanceUsage);
 			    });
-                    }, function(err) {
-                        $log.error(err.data.description);
                     });
 	    }
 	    
@@ -311,8 +287,6 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
                                 }
                                 $scope.memoryUsage.push(objectMemoryUsage);
                             });
-                    }, function(err) {
-                        $log.error(err.data.description);
                     });
             }
 	    
@@ -370,13 +344,9 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 					}                                                                                     
 					$scope.spacesTotalQuota += memory;          
 					$scope.setOrganizationQuota();                 
-				    }, function(err) {                                  
-					$log.error(err.data.description);                      
 				    });                                                           
 			    });                                                        
 			
-		    }, function(err) {                             
-			$log.error(err.data.description);           
 		    });   		
 	    };
 	    $scope.getSpacesForTheOrganization();
@@ -440,9 +410,6 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 				    $scope.currentUser.currentManager = orgManager;            
 				}                                                                
                             });  
-		    }, function(err) {                         
-			window.alert('error: ' + err.data.description);
-			$log.error(err.data.description);                                   
 		    });        
 	    };
 	    $scope.retrieveRoleOfAllUsersForTheOrganization();          
@@ -474,101 +441,4 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 		
             };
 
-	    
-	    $scope.editSpace = function(space) {    
-	    };   
-
-	    $scope.editOrganization = function() {   
-		var organization = {                                                                   
-		    'id': $scope.id,                                                                   
-		    'name': $scope.name,                                                               
-		    'quota_definition_guid': $scope.quotaDefID                                           
-		};
-	    }
-	    
-	    $scope.deleteOrganization = function() {  
-		var organization = {
-                    'id': $scope.id,
-                    'name': $scope.name,
-                    'quota_definition_guid': $scope.quotaDefID
-                };
-	    }
-	    
-	    // add space                                                                                 
-	    $scope.addSpace = function() {                                                               
-		var space = {                                                                         
-		    'organizationId': $scope.id                                                          
-		};
-	    }
-	    
-	    // new domain                                                                                
-	    $scope.newDomain = function() {                                                            
-		var domain = {                                                                         
-		    'organizationID': $scope.id                                                         
-		};
-	    }
-	    
-	    // delete domain                                                                               
-	    $scope.deleteDomain = function (domain) {    
-	    };
-	    
-	    // delete space                                                                              
-	    $scope.deleteSpace = function (space) {    
-	    };
-	    
-	    $scope.addUser = function() {                                                  
-		var spaces = $scope.spaces;
-	    };   
-	    
-	    $scope.disassociateUser = function(user) {                                      
-		var spaces =  $scope.spaces;               
-	    };    
-	    
-	    $scope.addManager = function(username) {                                                   
-		var user = {                                                                            
-		    'organizationId': $scope.id,                                                         
-		    'name': username                                                                    
-		};
-	    };
-	    
-	    $scope.deleteManager = function(userId) {                                                   
-		var user = {                                                                           
-		    'organizationId': $scope.id,                                                        
-		    'id': userId                                                                         
-		};
-	    };  
-	    
-	    $scope.addBillingManager = function(username) {                                  
-		var user = {                                                                            
-		    'organizationId': $scope.id,                                                         
-		    'name': username                                                                      
-		};
-	    };
-	    
-	    $scope.deleteBillingManager = function(userId) { 
-		var user = {
-                    'organizationId': $scope.id,
-                    'id': userId
-                };
-	    };
-	    
-	    $scope.addAuditor = function(username) {                               
-		var user = {
-                    'organizationId': $scope.id,
-                    'name': username
-		};
-	    };
-	    
-	    $scope.deleteAuditor = function(userId) {  
-		var user = {
-                    'organizationId': $scope.id,
-                    'name': username
-		};
-	    };    
-
-	    // delete user                                                                               
-	    $scope.deleteUser = function (user) {      
-
-	    };
-	    
 	}]);

@@ -1,4 +1,4 @@
-angular.module('app.auth').factory('authInterceptorService', ['$q', '$location', '$injector', '$rootScope', '$log', function($q, $location, $injector, $rootScope, $log) {
+angular.module('app').factory('authInterceptorService', ['$q', '$location', '$injector', '$rootScope', function($q, $location, $injector, $rootScope) {
 	    var authInterceptorServiceFactory = {};
 	    
 	    var _request = function(config) {
@@ -31,7 +31,6 @@ angular.module('app.auth').factory('authInterceptorService', ['$q', '$location',
 		    var $route = $injector.get('$route');
 		    var $location = $injector.get('$location');
 		    var messageService = $injector.get('messageService');
-		    $log.error(timeOut);
 		    if(timeOut > 1800000){
 			authService.logOut();
 			localStorage.setItem('lastTime', 0);
@@ -49,7 +48,6 @@ angular.module('app.auth').factory('authInterceptorService', ['$q', '$location',
 			    }else{
                     messageService.addMessage('danger', err.error_description, true);
 			    }
-			    $log.error(err);
 			});
 		}
 		

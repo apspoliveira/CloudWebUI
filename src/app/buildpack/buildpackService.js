@@ -1,48 +1,48 @@
-angular.module('app.featureFlag').factory('featureFlagService', ['$http', function($http) {
-	    var featureFlagServiceFactory = {};
+angular.module('app').factory('buildpackService', ['$q', '$http', function($q, $http) {
+	    var buildpackServiceFactory = {};
 
 	    var API_Endpoint = 'https://api.eu-gb.bluemix.net';
-            //var API_Endpoint = 'https://api.run.pivotal.io';                                                                                                                         
+            //var API_Endpoint = 'https://api.run.pivotal.io';                                    
             var accessToken = localStorage.getItem('accessToken');
-
-	    var _getAllFeatureFlags = function(organization) {
-
-		var url = '/v2/config/feature_flags';
-
+	    
+    var _getBuildpacks = function() {
+		
+		var url = API_Endpoint+'/v2/buildpacks';
+		
 		// http headers                                                                           
 		var headers = {
 		    'Accept': 'application/json',
 		    'Content-Type': 'application/json',
                     'Authorization': 'bearer ' + accessToken
 		};
-
-		var config = {
-		    headers: headers,
-		};
-
-		return $http.get(url, config);
-	    };
-
-	    var _getUserOrgCreationFeatureFlag = function(organization) {
-
-		var url = '/v2/config/feature_flags/user_org_creation';
-
-		// http headers                                                                           
-		var headers = {
-		    'Accept': 'application/json',
-		    'Content-Type': 'application/json',
-                    'Authorization': 'bearer ' + accessToken
-		};
-
+		
 		var config = {
 		    headers: headers
 		};
-
+		
 		return $http.get(url, config);
 	    };
 
-	    featureFlagServiceFactory.getAllFeatureFlags = _getAllFeatureFlags;
-	    featureFlagServiceFactory.getUserOrgCreationFeatureFlag = _getUserOrgCreationFeatureFlag;
+    var _getBuildpack = function(id) {
+		
+		var url = API_Endpoint+'/v2/buildpacks/'+id;
+		
+		// http headers                                                                           
+		var headers = {
+		    'Accept': 'application/json',
+		    'Content-Type': 'application/json',
+                    'Authorization': 'bearer ' + accessToken
+		};
+		
+		var config = {
+		    headers: headers
+		};
+		
+		return $http.get(url, config);
+	    };
 
-	    return featureFlagServiceFactory;
-	}]);
+    buildpackServiceFactory.getBuildpacks = _getBuildpacks;
+    buildpackServiceFactory.getBuildpack = _getBuildpack;
+
+    return buildpackServiceFactory;
+}]);

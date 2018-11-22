@@ -19,20 +19,10 @@ angular.module('app').config(['$routeProvider', function($routeProvider) {
 	      templateUrl: 'app/space/spaceDetails.html',
 		  controller: 'SpaceDetailsCtrl'
 		  })
-      
-      .when('/organizations/:organizationId/spaces/:spaceId/marketplace', {
-	      templateUrl: 'app/marketplace/marketplaceAddService.html',
-		  controller: 'MarketplaceAddServiceCtrl'
-		  })
-
+     
       .when('/organizations/:organizationId/spaces/:spaceId/marketplace/:serviceId', {
 	      templateUrl: 'app/marketplace/marketplaceSelectServicePlan.html',
 		  controller: 'MarketplaceSelectServicePlanCtrl'
-		  })
-
-      .when('/organizations/:organizationId/spaces/:spaceId/marketplace/:serviceId/plan/:servicePlanId', {
-	      templateUrl: 'app/marketplace/marketplaceAddServiceInstance.html',
-		  controller: 'MarketplaceAddServiceInstanceCtrl'
 		  })
 
       .when('/organizations/:organizationId/spaces/:spaceId/serviceInstances/:serviceInstanceId', {
@@ -65,27 +55,12 @@ angular.module('app').config(['$routeProvider', function($routeProvider) {
                   controller: 'ServiceBindingPreviewCtrl'
 		  })
       
-      .when('/marketplace', {
-	      templateUrl: 'app/marketplace/marketplaceAddService.html',
-		  controller: 'MarketplaceAddServiceCtrl'
-		  })
-      
       .when('/marketplace/:serviceId', {
 	      templateUrl: 'app/marketplace/marketplaceSelectServicePlan.html',
 		  controller: 'MarketplaceSelectServicePlanCtrl'
-		  })
-
-      .when('/marketplace/:serviceId/plan/:servicePlanId', {
-	      templateUrl: 'app/marketplace/marketplaceAddServiceInstance.html',
-		  controller: 'MarketplaceAddServiceInstanceCtrl'
 		  })
 
       .otherwise({
 	      redirectTo: '/organizations'
 		  });
 	}]);
-
-/*angular.module('app').config(['$httpProvider', function($httpProvider) {
-	    $httpProvider.interceptors.push('authInterceptorService');
-	    $httpProvider.withCredentials = true;
-	    }]);*/

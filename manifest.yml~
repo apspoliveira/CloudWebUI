@@ -1,5 +1,0 @@
----
-applications:
-- name: cf
-  memory: 128M
-  host: cloudwebui

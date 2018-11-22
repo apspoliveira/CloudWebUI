@@ -141,7 +141,7 @@ angular.module('app.application').factory('applicationService', ['$q', '$http', 
 		return $http.get(url, config);
 	    };
 
-	    applicationServiceFactory.getApplications = _getApplication;
+	    applicationServiceFactory.getApplications = _getApplications;
 	    applicationServiceFactory.getApplicationSummary = _getApplicationSummary;
 	    applicationServiceFactory.getStack = _getStack;
 	    applicationServiceFactory.getInstances = _getInstances;

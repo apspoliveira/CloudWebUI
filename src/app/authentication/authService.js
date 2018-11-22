@@ -1,4 +1,4 @@
-angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$injector', '$rootScope', function($http, $log, $q, $injector, $rootScope) {
+angular.module('app').factory('authService', ['$http', '$log', '$q', '$injector', '$rootScope', function($http, $log, $q, $injector, $rootScope) {
 	    var authServiceFactory = {};
 	    var UAA_Endpoint = "";
 	    
@@ -2193,98 +2193,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
 		    _authentication.isAuth = true;
 		    _authentication.userName = userName;
 		}
-	    };
-
-	    /*function stringToBytes(str) {
-		var cp, out = [];
-		for (var i=0; i<str.length; i++) {
-		    cp = str.charCodeAt(i);
-		    if (cp >= 0xD800 && cp <= 0xDFFF) {
-			cp = str.codePointAt(i);
-			if (cp > 0xFFFF) i++;
-		    }
-		    utf8_encode_char(cp, out);
-		}
-		return out;
-		}*/
-	    
-	    /*function utf8_encode_char(codePoint, out) {
-		if (codePoint < 0) 
-		    throw RangeError("Illegal code point: "+codePoint);
-		if (codePoint < 0x80) {
-		    out.push(  codePoint     &0x7F);
-		} else if(codePoint < 0x800) {
-		    out.push(((codePoint>>6 )&0x1F)|0xC0);
-		    out.push(( codePoint &0x3F)|0x80);
-		} else if (codePoint < 0x10000) {
-		    out.push(((codePoint>>12)&0x0F)|0xE0);
-		    out.push(((codePoint>>6 )&0x3F)|0x80);
-		    out.push(( codePoint &0x3F)|0x80);
-		} else if (codePoint < 0x110000) {
-		    out.push(((codePoint>>18)&0x07)|0xF0);
-		    out.push(((codePoint>>12)&0x3F)|0x80);
-		    out.push(((codePoint>>6 )&0x3F)|0x80);
-		    out.push(( codePoint &0x3F)|0x80);
-		} else 
-		    throw RangeError("Illegal code point: "+codePoint);
-		    }*/
-
-	    /*function ut8_decode_bytes(bytes) {
-		var string = "";
-		for (var i = 0; i < bytes.length; i++) {
-		    string += String.fromCharCode(bytes[i]);
-		}
-		return string;
-		}*/
-	    
-	    /*function encodeData(header, payload) {
-		var tokenParts = [];
-
-		const bytes = stringToBytes(header);
-		const encodedHeader = base64_encode(bytes, bytes.length);
-		//window.alert(encodedHeader);
-		tokenParts.push(encodedHeader);
-
-		// add in the payload
-		const bytes = stringToBytes(payload);
-		const encodedPayload = base64_encode(bytes, bytes.length);
-		//window.alert(encodedPayload);
-		tokenParts.push(encodedPayload);
-
-		// prepare the message 
-		const signingInput = tokenParts.join('.');
-
-		// return the signing input 
-		return signingInput;
-		}*/
-
-	    /*function decodeToken(token) {
-		if (typeof token === 'string') {
-		    // decompose the token into parts 
-		    const tokenParts = token.split('.');
-		    window.alert(tokenParts[0]);
-		    var header = base64_decode(tokenParts[0], tokenParts[0].length);
-		    header = ut8_decode_bytes(header);
-		    window.alert(header);
-		    
-		    window.alert(tokenParts[1]);
-		    var payload = base64_decode(tokenParts[1], tokenParts[1].length);
-		    payload = ut8_decode_bytes(payload);
-		    window.alert(payload);
-
-		    window.alert(tokenParts[2]);
-		    var signature = base64_decode(tokenParts[2], tokenParts[2].length);
-		    signature = ut8_decode_bytes(signature);
-		    window.alert(signature);
-
-		    // return the token object 
-		    return {
-			header: header,
-			    payload: payload,
-			    signature: signature 
-			    }
-		} 
-		}*/	       
+	    };   
 		    
 	    authServiceFactory.createClient = _createClient;
 	    authServiceFactory.getClient = _getClient;

@@ -1,9 +1,0 @@
-oauth:
-  clients:
-    admin:
-      authorized-grant-types: client_credentials
-      scope: read,write,password
-      authorities: ROLE_CLIENT,ROLE_ADMIN
-      id: admin
-      secret: adminclientsecret
-      resource-ids: clients

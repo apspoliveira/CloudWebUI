@@ -1,4 +1,4 @@
-angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootScope', '$scope', '$routeParams', '$log', 'applicationService', 'messageService', function($rootScope, $scope, $routeParams, $log, applicationService, messageService) {
+angular.module('app').controller('ApplicationDetailsCtrl', ['$rootScope', '$scope', '$routeParams', 'applicationService', function($rootScope, $scope, $routeParams, applicationService) {
 	    window.alert('Application details');
 	    
 	    $rootScope.rootFields.showContent = false;
@@ -37,17 +37,13 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
 	    $scope.scale = {};
 	    $scope.instances = [];
 	    
-	    $scope.test = '{"glossary": {"title": "example glossary","GlossDiv": {"title": "S","GlossList": {GlossEntry": {"ID": "SGML","SortAs": "SGML","GlossTerm": "Standard Generalized Markup Language","Acronym": "SGML","Abbrev": "ISO 8879:1986","GlossDef": {"para": "A meta-markup language, used to create markup languages such as DocBook.","GlossSeeAlso": ["GML", "XML"]},"GlossSee": "markup"}}}}}';
-	    
-	    //window.alert('Scope '+ $scope.test);
-	    
 	    // app summary  
 	    $scope.getApplicationSummary = function() {
 		window.alert('get application summary');
   
 		var getApplicationSummaryPromise = applicationService.getApplicationSummary($scope.applicationId);                                                                                         
 		getApplicationSummaryPromise.then(function(response) {                                    
-			$scope.summary = response.data;                                                      		 $scope.stackId = response.data.stack_guid;                                                       $scope.name = response.data.name;                                                                $scope.state = response.data.state;                                                              $scope.nrOfInstances = response.data.instances;                                                  $scope.scale.instances = response.data.instances;                                                $scope.diskQuota = response.data.disk_quota;                                                     $scope.memory = response.data.memory;                                                            $scope.scale.memory = response.data.memory;                                                      $scope.scale.initialMemoryValue = $scope.scale.memory;                                           $scope.lastPush = response.data.package_updated_at;                                              $scope.buildPack = response.data.detected_buildpack;                                  
+		    $scope.summary = response.data;                                                      		 $scope.stackId = response.data.stack_guid;                                                       $scope.name = response.data.name;                                                                $scope.state = response.data.state;                                                              $scope.nrOfInstances = response.data.instances;                                                  $scope.scale.instances = response.data.instances;                                                $scope.diskQuota = response.data.disk_quota;                                                     $scope.memory = response.data.memory;                                                            $scope.scale.memory = response.data.memory;                                                      $scope.scale.initialMemoryValue = $scope.scale.memory;                                           $scope.lastPush = response.data.package_updated_at;                                              $scope.buildPack = response.data.detected_buildpack;                                  
 			if ($scope.buildPack==="") $scope.buildPack = response.data.buildpack;                
 			$scope.startCommand = response.data.detected_start_command;              
 			$scope.packageState = response.data.package_state;                                               $scope.services = response.data.services;                                             
@@ -62,9 +58,6 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
 			// get stack                                                            
 			applicationService.getStack($scope.stackId).then(function(stackResponse) {            
 				$scope.stack = stackResponse.data;                              
-			    }, function(err) {                                                 
-				messageService.addMessage('danger', 'Stack load failed.');      
-				$log.error(err);                                                
 			    });                                                                                                                                                         
 			// get environment variables   
 			applicationService.getEnvironmentVariables($scope.applicationId).then(function(envVarResponse) {                                                                        
@@ -74,9 +67,6 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
 					$scope.nrOfUserEnvVars += 1;                           
 				    });                                                                               
 				$scope.userEnvironmentVariables = $scope.environmentVariables.environment_json;   
-			    }, function(err) {                                                 
-				messageService.addMessage('danger', 'Could not load environment variables.');     
-				$log.error(err);                                                
 			    });                                                                                   
 			// get service bindings and add to the service the credentials         
 			var getServiceBindingsPromise = applicationService.getServiceBindings($scope.applicationId);                                                                            
@@ -96,15 +86,9 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
 						}                                               
 					    });      
 				    });                                                      
-			    }, function(err) {                                                  
-				messageService.addMessage('danger', 'The service bindings have not been loaded.');                                                                              
-				$log.error(err);                                                
 			    });                                                                                   
 			if($scope.state === 'STARTED') $scope.getInstances();                   
                                                                                               
-		    }, function(err) {                                                         
-			messageService.addMessage('danger', 'The application summary has not been loaded.');  
-			$log.error(err);                                                        
 		    });       	
 	    };                                                                                                           
 	    $scope.getApplicationSummary();    
@@ -120,9 +104,6 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
 				instance.stats.minutes = minutes;                               
 			    });                                                                                   
 			$scope.instances = instancesResponse.data;                               
-		    }, function(err) {                                                          
-			messageService.addMessage('danger', 'Could not load app instances.');  
-			$log.error(err);                                                        
 		    });       
 	    };    
 
@@ -130,88 +111,6 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
 	    applicationService.getAppEvents($scope.applicationId).then(function(appEventsResponse) {      
 		    $scope.appEvents = appEventsResponse.data.resources;                        
 		    $scope.eventTotalpages = appEventsResponse.data.total_pages;               
-		    $scope.eventTotalResults = appEventsResponse.data.total_results;                         }, function(err) {                                                                  
-		    $log.error(err);                                                          
-		    messageService.addMessage('danger', 'Could not load app events: ' +err);                 });            
-
-	    // get application events      
-	    
-	    $scope.editApplication = function() {                                                                        
-		var application = {                                                                            
-		    'id': $scope.applicationId,                                                          
-		    'name': $scope.name                                                                  
-		};
-		
-	    };   
-	    
-	    $scope.deleteApplication = function() {                                             
-		var applicationId = $scope.applicationId;      
-	    };        
-
-	    $scope.mapRoute = function() {                                                                                      // applicationId injection                                                                               
-		var route = {                                                                                  
-		    'organizationId': $scope.organizationId,                                              
-		    'applicationId': $scope.applicationId,                                               
-		    'spaceId': $scope.spaceId                                                                  
-		};
-
-	    };   
-
-	    $scope.unmapRoute = function(route) {                                                                                                                                              
-		// applicationId injection                                                                     
-		route.applicationId = $scope.applicationId;                                               
-		route.id = route.guid;       
-	    };                                                                                                                                                                                     
-	    $scope.addServiceBinding = function(alreadyBoundServices) {                                                  
-		var config = {                                                                         
-		    applicationId: $scope.applicationId,                                                  
-		    spaceId: $scope.spaceId,                                                             
-		    alreadyBoundServices: alreadyBoundServices                                               
-		};
-
-	    };                                                                                                                                                                
-	    $scope.deleteServiceBinding = function(service) {       
-	    };                                                                                                                                                                                  
-	    $scope.addUserEnv = function() {                                                              
-		var config = {                                                                           
-		    applicationId: $scope.applicationId,                                                 
-		    existingUserEnvs: $scope.userEnvironmentVariables                                          
-		};
-
-	    };                                                                                                                                                                                             
-	    $scope.editUserEnv = function(userEnvKey, userEnvValue) {                                                    
-		var userEnvToEdit = {                                                                     
-		    key: userEnvKey,                                                                       
-		    value: userEnvValue                                                                   
-		};                                                                                                       
-		var config = {                                                                           
-		    applicationId: $scope.applicationId,                                                 
-		    existingUserEnvs: $scope.userEnvironmentVariables,                                     
-		    userEnvToEdit: userEnvToEdit                                                               
-		};
-		
-	    };                                                                                                                                                                                               
-	    $scope.deleteUserEnv = function(userEnvKey) {                                                                
-		var config = {                                                                         
-		    applicationId: $scope.applicationId,                                                  
-		    existingUserEnvs: $scope.userEnvironmentVariables,                                  
-		    userEnvToDelete: userEnvKey                                                          
-		};
-
-	    };                                                                                                                                                                                 
-	    $scope.stopApplication = function() {   
-	    };                                                                                                                                                                              
-	    $scope.startApplication = function() {    
-	    };                                                                                                                                                                             
-	    $scope.restartApplication = function() {   
-	    };                                                                                                                                                                                               
-	    $scope.scaleApplication = function() {                                                                       
-		window.alert('scale application');
-
-		var config = {                                                                            
-		    applicationId: $scope.applicationId,                                                
-		    scale: $scope.scale                                                                  
-		};
-	    };
-	    
-	}]);
+		$scope.eventTotalResults = appEventsResponse.data.total_results;                         });            
+                 	    
+}]);
