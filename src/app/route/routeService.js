@@ -116,10 +116,30 @@ angular.module('app.routes').factory('routeService', ['$http', function($http) {
                 return $http.get(url, config);
             };
 
+      var _getRouteMappings = function(id) {
+             
+                var url = API_Endpoint+'/v2/routes/' + id + '/route_mappings';
+
+                // http headers                                                                                                                          
+                var headers = {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'bearer ' + accessToken
+                };
+
+                var config = {
+                    headers: headers
+                };
+
+                return $http.get(url, config);
+            };
+
+
 	    routeServiceFactory.getRoutes = _getRoutes;
             routeServiceFactory.getRoutesForTheSpace = _getRoutesForTheSpace;
             routeServiceFactory.getRoutesForApp = _getRoutesForApp;
             routeServiceFactory.getAppsForRoute = _getAppsForRoute;
+    routeServiceFactory.getRouteMappings = _getRouteMappings;
 
 	    return routeServiceFactory;
 	}]);

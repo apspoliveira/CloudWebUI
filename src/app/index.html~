@@ -9,22 +9,24 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.1/angular.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.1/angular-route.js"></script>
  
-  <!--<script src="app/app.js"></script>
-  <script src="app/app.config.js"></script>
+  <script src="app.js"></script>
+  <script src="app.config.js"></script>
   
-  <script src="app/authentication/authService.js"></script>
-  <script src="app/login/loginCtrl.js"></script>
-  <script src="app/organization/organizationPreviewCtrl.js"></script>
-  <script src="app/organization/organizationService.js"></script>
-  <script src="app/serviceBinding/serviceBindingService.js"></script>
-  <script src="app/serviceBinding/serviceBindingPreviewCtrl.js"></script>-->
+  <!--<script src="authentication/authService.js"></script>
+  <script src="login/loginCtrl.js"></script>
+  <script src="organization/organizationPreviewCtrl.js"></script>
+  <script src="organization/organizationService.js"></script>
+  <script src="serviceBinding/serviceBindingService.js"></script>
+  <script src="serviceBinding/serviceBindingPreviewCtrl.js"></script>-->
+
+</script>
 
 </head>
 <body>
 
-<div id="login">
+<!--<div id="login">
   <div id="login-content">
-    <h1>User Login</h1>
+    <h1 class="text-center">User Login</h1>
     <form class="form-horizontal" role="form" name="formLogin">
       <div class="form-group">
         <div class="col-md-12">
@@ -33,21 +35,11 @@
       </div>
     </form>
   </div>
-</div>
-  
-<!--  <ng-view></ng-view>-->
-<script>
-  angular.module('app', ['ngRoute']);
-  
-  angular.module('app').config(function($routeProvider) {
-  $routeProvider
-  .when('/login', {
-  templateUrl: 'app/login/login.html'
-  });
-  //.otherwise({
-  //redirectTo: '/login'
-  //});
-</script>
-  
+</div>-->
+ 
+<a href="#!/login">Login</a>
+<ng-view></ng-view>
+
+
 </body>
 </html>

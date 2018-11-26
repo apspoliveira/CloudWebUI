@@ -41,9 +41,28 @@ angular.module('app.serviceBinding').factory('serviceBindingService', ['$http', 
 
                 return $http.get(url, config);
 	    }
+
+     var _getServiceBindingParameters = function(id) {
+		
+		var url = API_Endpoint+'/v2/service_bindings/' + id+'/parameters';
+
+                // http headers                                                                   
+                var headers = {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'bearer ' + accessToken
+                };
+
+                var config = {
+                    headers: headers
+                };
+
+                return $http.get(url, config);
+     }
 	    
 	    serviceBindingServiceFactory.getServiceBinding = _getServiceBinding;
 	    serviceBindingServiceFactory.getServiceBindings = _getServiceBindings;
-	    
+    serviceBindingServiceFactory.getServiceBindingParameters = _getServiceBindingParameters;
+
 	    return serviceBindingServiceFactory;
 	}]);

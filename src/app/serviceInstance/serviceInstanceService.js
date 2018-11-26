@@ -4,7 +4,26 @@ angular.module('app.serviceInstance').factory('serviceInstanceService', ['$http'
 	    var API_Endpoint = 'https://api.eu-gb.bluemix.net';
             //var API_Endpoint = 'https://api.run.pivotal.io';                                                                  
             var accessToken = localStorage.getItem('accessToken');
-                                                    
+                
+     var _getServiceInstances = function() {
+
+		// params                                                                                                                                  
+                var url = API_Endpoint+'/v2/service_instances/';
+
+                // http headers                                                                 
+		var headers = {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'bearer ' + accessToken
+                };
+
+                var config = {
+                    headers: headers
+                };
+
+                return $http.get(url, config);
+            };
+                                    
 	    var _getServiceInstance = function(serviceInstanceId) {
 
 		// params                                                                                                                                  
@@ -138,6 +157,7 @@ angular.module('app.serviceInstance').factory('serviceInstanceService', ['$http'
                 return $http.get(url, config);
 	    }
 	    
+   serviceInstanceServiceFactory.getServiceInstances = _getServiceInstances;
 	    serviceInstanceServiceFactory.getServiceInstance = _getServiceInstance;
 	    serviceInstanceServiceFactory.getServiceBindingsForServiceInstance = _getServiceBindingsForServiceInstance;
 	    serviceInstanceServiceFactory.getServiceKeysForServiceInstance = _getServiceKeysForServiceInstance;
